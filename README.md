@@ -16,6 +16,7 @@ The core features of Rails is organized into libraries called *gems*. A list of 
 Get ruby-install from 
 https://github.com/postmodern/ruby-install
 
+Install ruby
 > ruby-install ruby 2.2.3
 
 Update gems 
