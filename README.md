@@ -11,16 +11,10 @@ The core features of Rails is organized into libraries called *gems*. A list of 
 * Action Mailer
 * Active Resource
 
+
 ### Installation
 
-Get ruby-install from 
-https://github.com/postmodern/ruby-install
-
-Install ruby
-> ruby-install ruby 2.2.3
-
-Update gems 
-> gem update --system
+Install ruby from https://www.ruby-lang.org/en/downloads/
 
 Install rails
 > gem install rails
