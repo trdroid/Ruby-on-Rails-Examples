@@ -16,13 +16,13 @@ The core features of Rails is organized into libraries called *gems*. A list of 
 Get ruby-install from 
 https://github.com/postmodern/ruby-install
 
-ruby-install ruby 2.2.3
+> ruby-install ruby 2.2.3
 
 Update gems 
-gem update --system
+> gem update --system
 
 Install rails
-gem install rails
+> gem install rails
 
 
 ### Model-View-Controller (MVC) Paradigm
