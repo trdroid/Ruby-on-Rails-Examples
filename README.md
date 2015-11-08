@@ -11,6 +11,20 @@ The core features of Rails is organized into libraries called *gems*. A list of 
 * Action Mailer
 * Active Resource
 
+### Installation
+
+Get ruby-install from 
+https://github.com/postmodern/ruby-install
+
+ruby-install ruby 2.2.3
+
+Update gems 
+gem update --system
+
+Install rails
+gem install rails
+
+
 ### Model-View-Controller (MVC) Paradigm
 
 The MVC paradigm helps to keep and maintain the logically different parts of an application separate while enabling data flow between them.
