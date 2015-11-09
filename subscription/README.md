@@ -19,9 +19,9 @@ Change to the application directory and start the server included in the Ruby st
 
 To generate a specific part of an application, pass generate as an argument to the rails command.
 
-> rails generate <what has to be generated> 
+> rails generate \<what has to be generated\> 
 
-> rails g <what has to be generated> 
+> rails g \<what has to be generated\> 
 
 ### Scaffolding
 
