@@ -1,4 +1,4 @@
-# App Structure and Contents 
+# App Creation, Its Structure and Contents 
 
 ### Creating an application
 
