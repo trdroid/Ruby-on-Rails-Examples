@@ -1,4 +1,4 @@
-# Commands 
+# Project Structure and Contents 
 
 ### Creating an application
 
