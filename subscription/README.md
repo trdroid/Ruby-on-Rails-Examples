@@ -1,4 +1,4 @@
-# Project Structure and Contents 
+# App Structure and Contents 
 
 ### Creating an application
 
