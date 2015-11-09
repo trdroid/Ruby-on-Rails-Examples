@@ -158,13 +158,21 @@ Change to the application directory and start the server included in the Ruby st
 
 > rails server (or) rails s
 
-### Generating specific part of an application
+### Generating a specific part of an application
 
 To generate a specific part of an application, pass generate as an argument to the rails command.
 
 > rails generate \<what has to be generated\> 
 
 > rails g \<what has to be generated\> 
+
+### Removing a specific part of an application
+
+If an error was made when generating a scaffold, it could be destroyed by the following command
+
+> rails destroy scaffold \<what was generated\> 
+
+> rails destroy scaffold student
 
 ### Scaffolding
 
@@ -209,21 +217,17 @@ The scaffold command generates a model, a controller, views and tests.
       invoke  scss
       create    app/assets/stylesheets/scaffolds.scss
 
-Running the application now causes the following error:
+Running the application now in the server causes the following error:
 
 *Migrations are pending. To resolve this issue, run: bin/rake db:migrate RAILS_ENV=development*
 
-### Removing a specific part of an application
+### Create the database
 
-If an error was made when generating a scaffold, it could be destroyed by the following command
+One of the files that the scaffold created was db/migrate/20151109002659_create_students.rb. 
 
-> rails destroy scaffold \<what was generated\> 
+It is a Ruby class called Migration which is used as a version control for the database. Notice the timestamp associated with the filename. 
 
-> rails destroy scaffold student
-
-## Creating 
-
-### Run the migration
+A Migration could be used to implement incremental changes to the database schema. 
 
 Run the following command which allows running of multiple migrations that weren't run before. The migrations are run in a sequential manner
 
