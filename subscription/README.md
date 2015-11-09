@@ -250,7 +250,22 @@ A Migration class inherits from *ActiveRecord::Migration*
 
 The class CreateStudents contains table creation logic in its change method. It contains fields that were declared at the time of scaffold generation as well as two timestamp fields, created_at and updated_at which contains the time when the records are created and updated respectively. 
 
-Run the following command which allows running of multiple migrations that weren't run before. The migrations are run in a sequential manner
+#### Running the migration forward
+
+The following creates an SQLite3 database in a new file at db/development.sqlite3 and runs the change method from the latest migration to create the students table in the database. 
 
 > bundle exec rake db:migrate
 
+In addition to running the change method from the latest migration, this method also runs any migrations that have not been run yet. Mutiple migrations are run in a sequential manner.  
+
+#### Rolling back the migration
+
+To roll back the latest migration, run the following command which reverses the operations performed in the change method. If the migrations performed in the change method are complex and cannot be automatically rolled back, the migration should be defined in *up* and *down* methods. In such a case, rolling back with the following command calls the down method.
+
+> bundle exec rake db:rollback
+
+The following method rolls back more than one migration which is specified by the STEP argument
+
+> bundle exec rake db:rollback STEP=\<number of migrations to rollback\>
+
+> bundle exec rake db:rollback STEP=2
