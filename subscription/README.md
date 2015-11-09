@@ -252,7 +252,7 @@ The class CreateStudents contains table creation logic in its change method. It 
 
 #### Running the migration forward
 
-The following creates an SQLite3 database in a new file at db/development.sqlite3 and runs the change method from the latest migration to create the students table in the database. 
+The following *creates an SQLite3 database* in a new file at db/development.sqlite3 and runs the change method from the latest migration to *create the students table* in the database. 
 
 > bundle exec rake db:migrate
 
