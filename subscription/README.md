@@ -180,7 +180,7 @@ Scaffolds can be used to quickly generate temporary structures that could be exp
 
 The scaffold command generates a model, a controller, views and tests. 
 
-> rails generate scaffold <name of the table> <attribute:type> <attribute:type> ..
+> rails generate scaffold \<name of the table\> \<attribute:type\> \<attribute:type\> ..
 
 > rails generate scaffold student name:string grade:integer
 
