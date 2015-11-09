@@ -160,7 +160,7 @@ Change to the application directory and start the server included in the Ruby st
 
 ### Generating a specific part of an application
 
-To generate a specific part of an application, pass generate as an argument to the rails command.
+To generate a specific part of an application, pass *generate* as an argument to the rails command.
 
 > rails generate \<what has to be generated\> 
 
@@ -231,9 +231,24 @@ If an error is made while creating the scaffold, it could be destroyed
 
 One of the files that the scaffold created was db/migrate/20151109002659_create_students.rb. 
 
-It is a Ruby class called Migration which is used as a version control for the database. Notice the timestamp associated with the filename. 
+```ruby
+class CreateStudents < ActiveRecord::Migration
+  def change
+    create_table :students do |t|
+      t.string :name
+      t.integer :grade
 
-A Migration could be used to implement incremental changes to the database schema. 
+      t.timestamps null: false
+    end
+  end
+end
+```
+
+It is a Ruby class called Migration which is used as a version control for the database and allows implementing incremental changes to the database schema. Notice the timestamp associated with the filename. 
+
+A Migration class inherits from *ActiveRecord::Migration*
+
+The class CreateStudents contains table creation logic in its change method. It contains fields that were declared at the time of scaffold generation as well as two timestamp fields, created_at and updated_at which contains the time when the records are created and updated respectively. 
 
 Run the following command which allows running of multiple migrations that weren't run before. The migrations are run in a sequential manner
 
