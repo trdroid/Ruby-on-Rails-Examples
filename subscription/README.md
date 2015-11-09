@@ -244,7 +244,7 @@ class CreateStudents < ActiveRecord::Migration
 end
 ```
 
-It is a Ruby class called Migration which is used as a version control for the database and allows implementing incremental changes to the database schema. Notice the timestamp associated with the filename. 
+It is a Ruby class called Migration which is used as a version control for the database and allows implementing incremental changes to the database schema. Notice the timestamp associated with the filename in the format YYYYmmddHHMMSS. 
 
 A Migration class inherits from *ActiveRecord::Migration*
 
