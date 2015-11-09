@@ -170,9 +170,9 @@ To generate a specific part of an application, pass generate as an argument to t
 
 If an error was made when generating a scaffold, it could be destroyed by the following command
 
-> rails destroy scaffold \<what was generated\> 
+> rails destroy \<what was generated\> 
 
-> rails destroy scaffold student
+> rails d \<what was generated\>
 
 ### Scaffolding
 
@@ -221,7 +221,13 @@ Running the application now in the server causes the following error:
 
 *Migrations are pending. To resolve this issue, run: bin/rake db:migrate RAILS_ENV=development*
 
-### Create the database
+This is because the migration has not yet been run.
+
+If an error is made while creating the scaffold, it could be destroyed
+
+> rails destroy scaffold student
+
+### Creating the database
 
 One of the files that the scaffold created was db/migrate/20151109002659_create_students.rb. 
 
