@@ -311,7 +311,7 @@ The create() method calls the new() method with student_params. student_params()
 
 When this object is passed to the new() method, Rails sets the attributes to the values from the form. 
 
-The @student.save() method validates the record, saves it to the database and returns true.
+The @student.save() method validates the record, saves it to the database if valid and returns true.
 
 
 
