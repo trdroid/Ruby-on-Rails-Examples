@@ -276,7 +276,7 @@ The following method rolls back more than one migration which is specified by th
 
 > bundle exec rake db:rollback STEP=2
 
-*<b>Run the application on the server<b>*
+*<b>Run the application on the server</b>*
 
 ### Understanding app/controllers
 
