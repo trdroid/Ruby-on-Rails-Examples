@@ -219,7 +219,7 @@ The scaffold command generates a model, a controller, views and tests.
       invoke  scss
       create    app/assets/stylesheets/scaffolds.scss
 
-*<b>Run the application on the server<b>*
+*<b>Run the application on the server</b>*
 
 ### Understanding app/db
 
@@ -279,5 +279,39 @@ The following method rolls back more than one migration which is specified by th
 *<b>Run the application on the server<b>*
 
 ### Understanding app/controllers
+
+*<b>app/controllers/students_controller.rb</b>*
+
+```ruby
+  # GET /students/new
+  def new
+    @student = Student.new
+  end
+```
+The new method initializes a new instance of the Student model, assigns it to @student, which is passed to the view automatically by Rails.
+
+```ruby
+  # POST /students
+  # POST /students.json
+  def create
+    @student = Student.new(student_params)
+
+    respond_to do |format|
+      if @student.save
+        format.html { redirect_to @student, notice: 'Student was successfully created.' }
+        format.json { render :show, status: :created, location: @student }
+      else
+        format.html { render :new }
+        format.json { render json: @student.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+```
+The create() method calls the new() method with student_params. student_params() is a method which calls the params() method which returns the parameters sent from the form in a Hash-like object.
+
+When this object is passed to the new() method, Rails sets the attributes to the values from the form. 
+
+The @student.save() method validates the record, saves it to the database and returns true.
+
 
 
