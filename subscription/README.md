@@ -1,6 +1,6 @@
 # App Creation, Its Structure and Contents 
 
-### Creating an application
+## Creating an application
 
 > rails new \<name of the application\>
 
@@ -152,13 +152,15 @@
 NOTE: Attempting to create an application with a name that is a reserved word in Ruby or Rails would 
 result in an error.
 
-### Starting the application
+## Starting the application
 
 Change to the application directory and start the server included in the Ruby standard library known as WEBrick
 
 > rails server (or) rails s
 
-### Generating a specific part of an application
+Visit <server URL>/students (http://localhost:3000/students) in a browser
+
+## Generating a specific part of an application
 
 To generate a specific part of an application, pass *generate* as an argument to the rails command.
 
@@ -166,7 +168,7 @@ To generate a specific part of an application, pass *generate* as an argument to
 
 > rails g \<what has to be generated\> 
 
-### Removing a specific part of an application
+## Removing a specific part of an application
 
 If an error was made when generating a scaffold, it could be destroyed by the following command
 
@@ -174,7 +176,7 @@ If an error was made when generating a scaffold, it could be destroyed by the fo
 
 > rails d \<what was generated\>
 
-### Scaffolding
+## Scaffolding
 
 Scaffolds can be used to quickly generate temporary structures that could be experimented with. 
 
@@ -216,6 +218,10 @@ The scaffold command generates a model, a controller, views and tests.
       create      app/assets/stylesheets/students.scss
       invoke  scss
       create    app/assets/stylesheets/scaffolds.scss
+
+*<b>Run the application on the server<b>*
+
+### Understanding app/db
 
 Running the application now in the server causes the following error:
 
@@ -269,3 +275,9 @@ The following method rolls back more than one migration which is specified by th
 > bundle exec rake db:rollback STEP=\<number of migrations to rollback\>
 
 > bundle exec rake db:rollback STEP=2
+
+*<b>Run the application on the server<b>*
+
+### Understanding app/controllers
+
+
