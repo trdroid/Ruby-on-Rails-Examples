@@ -313,5 +313,11 @@ When this object is passed to the new() method, Rails sets the attributes to the
 
 The @student.save() method validates the record, saves it to the database if valid and returns true.
 
+If it returns true, then the action redirects to the new student object using the redirect_to method.
+
+The redirect_to method takes a path or an object that it will convert to a path.
+
+
+
 
 
