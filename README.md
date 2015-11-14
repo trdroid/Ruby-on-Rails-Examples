@@ -16,17 +16,32 @@ The core features of Rails is organized into libraries called *gems*. A list of 
 
 Install ruby from https://www.ruby-lang.org/en/downloads/
 
-Install rails
-> gem install rails
+Check to see if RubyGems is installed
+
+> gem -v
+
+Install rails using RubyGems
+
+> gem install rails (or) sudo gem install rails
+
+Install sqlite3 using RubyGems
+
+> gem install sqlite3
+
+*To deal with multiple versions of ruby*
+
+Ruby and Rails can also be installed using Ruby Version Manager (RVM)
+
+Different versions of Ruby can be managed with rbenv
 
 
 ### Model-View-Controller (MVC) Paradigm
 
-The MVC paradigm helps to keep and maintain the logically different parts of an application separate while enabling data flow between them.
+The MVC paradigm is an excellent approach for building maintainable applications. It advocates to separate logically different parts of an application while enabling data flow between them. The logic for each layer is confined to the layer. 
 
 > Models
 
-Models contain domain logic of an application. Models define the code that interacts with the tables in a database to perform actions on the data. These actions include retrieving, validating, manipulating etc.
+Models represent the domain logic (API) and the domain data structure of an application. Models define the code that interacts with the tables in a database to perform actions on the data. These actions include retrieving, validating, manipulating etc.
 
 > Controllers 
 
