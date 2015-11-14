@@ -219,6 +219,8 @@ The scaffold command generates a model, a controller, views and tests.
       invoke  scss
       create    app/assets/stylesheets/scaffolds.scss
 
+The *create* entries in the output identify the directories and files that are created by the generator.
+
 *<b>Run the application on the server</b>*
 
 ### Understanding app/db
