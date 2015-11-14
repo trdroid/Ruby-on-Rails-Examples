@@ -16,8 +16,23 @@ The core features of Rails is organized into libraries called *gems*. A list of 
 
 Install ruby from https://www.ruby-lang.org/en/downloads/
 
-Install rails
-> gem install rails
+Check to see if RubyGems is installed
+
+> gem -v
+
+Install rails using RubyGems
+
+> gem install rails (or) sudo gem install rails
+
+Install sqlite3 using RubyGems
+
+> gem install sqlite3
+
+*To deal with multiple versions of ruby*
+
+Ruby and Rails can also be installed using Ruby Version Manager (RVM)
+
+Different versions of Ruby can be managed with rbenv
 
 
 ### Model-View-Controller (MVC) Paradigm
