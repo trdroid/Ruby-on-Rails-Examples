@@ -52,7 +52,9 @@ They ensure that the user is authenticated and authorized before acting on the d
 
 Views display information provided by the Controllers. Rails uses a templating language called *Embedded Ruby (ERB)* which allows to embed Ruby into any kind of file. These ERB templates are preprocessed on the server side and the output is displayed to the user. 
 
-Rails follows a controller-centric approach and does not allow the creation of views directly. The views MUST be associated with the controllers. 
+### Rails MVC
+
+Rails follows a controller-centric approach by not allowing the creation of views directly. The views MUST be associated with the controllers. 
 
 ### Testing Frameworks
 
