@@ -37,11 +37,11 @@ Different versions of Ruby can be managed with rbenv
 
 ### Model-View-Controller (MVC) Paradigm
 
-The MVC paradigm helps to keep and maintain the logically different parts of an application separate while enabling data flow between them.
+The MVC paradigm is an excellent approach for building maintainable applications. It advocates to separate logically different parts of an application while enabling data flow between them. The logic for each layer is confined to the layer. 
 
 > Models
 
-Models contain domain logic of an application. Models define the code that interacts with the tables in a database to perform actions on the data. These actions include retrieving, validating, manipulating etc.
+Models represent the domain logic (API) and the domain data structure of an application. Models define the code that interacts with the tables in a database to perform actions on the data. These actions include retrieving, validating, manipulating etc.
 
 > Controllers 
 
