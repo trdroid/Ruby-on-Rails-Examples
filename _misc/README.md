@@ -30,7 +30,7 @@ To avoid this extra typing, try *binstubs*
 
 The command above starts a WeBrick server. A WeBrick server supports testing applications during development and is not meant for large scale deployment. By default, it binds to localhost at 0.0.0.0 or 127.0.0.1 and is not accessible from other computers. 
 
-An address for the server can be specified with -b and -p (port) options to make it accessible from other computers. 
+An address for the server to use can be specified with -b and -p (port) options to make it accessible from other computers. 
 
 ### Server restart
 
