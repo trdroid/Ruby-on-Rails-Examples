@@ -219,11 +219,11 @@ Run rake to run the database migration created in the previous step. This would 
 * created_at
 * updated_at
 
-id is a unique and auto-incrementing integer that identifies each row uniquely.
+<b>id</b> is a unique and auto-incrementing integer that identifies each row uniquely.
 
 name, content fields are to hold the name and content of <i>a document</i>
 
-created_at and updated_at are fields that the framework deals with. They are used to track the creation and last updated timestamps. 
+<b>created_at and updated_at</b> are fields that the framework deals with. They are used to track the creation and last updated timestamps. 
 
 > $ bin/rake db:migrate
 
