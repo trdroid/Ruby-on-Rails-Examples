@@ -1,3 +1,4 @@
+<i>Creating the application</i>
 
 > rails new document_management
   
@@ -146,7 +147,7 @@
 
 <hr>
 
-Contents of document_management
+<i>Contents of document_management</i>
 
 > $ cd document_management
 
@@ -154,7 +155,7 @@ Contents of document_management
   
     app  bin  config  config.ru  db  Gemfile  Gemfile.lock  lib  log  public  Rakefile  README.rdoc  test  tmp  vendor
 
-Contents of document_management/bin
+<i>Contents of document_management/bin</i>
 
 > $ ls bin
   
@@ -162,11 +163,114 @@ Contents of document_management/bin
 
 <hr>
 
-Start WEBrick server
+<i>Contents of the Gemfile</i>
+
+>   $ cat Gemfile
+
+    source 'https://rubygems.org'
+
+
+    # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+    gem 'rails', '4.2.4'
+    # Use sqlite3 as the database for Active Record
+    gem 'sqlite3'
+    # Use SCSS for stylesheets
+    gem 'sass-rails', '~> 5.0'
+    # Use Uglifier as compressor for JavaScript assets
+    gem 'uglifier', '>= 1.3.0'
+    # Use CoffeeScript for .coffee assets and views
+    gem 'coffee-rails', '~> 4.1.0'
+    # See https://github.com/rails/execjs#readme for more supported runtimes
+    # gem 'therubyracer', platforms: :ruby
+    
+    # Use jquery as the JavaScript library
+    gem 'jquery-rails'
+    # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+    gem 'turbolinks'
+    # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+    gem 'jbuilder', '~> 2.0'
+    # bundle exec rake doc:rails generates the API under doc/api.
+    gem 'sdoc', '~> 0.4.0', group: :doc
+    
+    # Use ActiveModel has_secure_password
+    # gem 'bcrypt', '~> 3.1.7'
+    
+    # Use Unicorn as the app server
+    # gem 'unicorn'
+    
+    # Use Capistrano for deployment
+    # gem 'capistrano-rails', group: :development
+    
+    group :development, :test do
+      # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+      gem 'byebug'
+    end
+    
+    group :development do
+      # Access an IRB console on exception pages or by using <%= console %> in views
+      gem 'web-console', '~> 2.0'
+    
+      # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+      gem 'spring'
+    end
+
+
+<hr>
+
+<i>Explore tasks in the application</i>
+
+> bin/rake --tasks
+
+    Running via Spring preloader in process 3965
+    rake about                              # List versions of all Rails frameworks and the environment
+    rake assets:clean[keep]                 # Remove old compiled assets
+    rake assets:clobber                     # Remove compiled assets
+    rake assets:environment                 # Load asset compile environment
+    rake assets:precompile                  # Compile all the assets named in config.assets.precompile
+    rake cache_digests:dependencies         # Lookup first-level dependencies for TEMPLATE (like messages/show or comments/_comment.html)
+    rake cache_digests:nested_dependencies  # Lookup nested dependencies for TEMPLATE (like messages/show or comments/_comment.html)
+    rake db:create                          # Creates the database from DATABASE_URL or config/database.yml for the current RAILS_ENV (use db:create:all to create all databases in the config)
+    rake db:drop                            # Drops the database from DATABASE_URL or config/database.yml for the current RAILS_ENV (use db:drop:all to drop all databases in the config)
+    rake db:fixtures:load                   # Load fixtures into the current environment's database
+    rake db:migrate                         # Migrate the database (options: VERSION=x, VERBOSE=false, SCOPE=blog)
+    rake db:migrate:status                  # Display status of migrations
+    rake db:rollback                        # Rolls the schema back to the previous version (specify steps w/ STEP=n)
+    rake db:schema:cache:clear              # Clear a db/schema_cache.dump file
+    rake db:schema:cache:dump               # Create a db/schema_cache.dump file
+    rake db:schema:dump                     # Create a db/schema.rb file that is portable against any DB supported by AR
+    rake db:schema:load                     # Load a schema.rb file into the database
+    rake db:seed                            # Load the seed data from db/seeds.rb
+    rake db:setup                           # Create the database, load the schema, and initialize with the seed data (use db:reset to also drop the database first)
+    rake db:structure:dump                  # Dump the database structure to db/structure.sql
+    rake db:structure:load                  # Recreate the databases from the structure.sql file
+    rake db:version                         # Retrieves the current schema version number
+    rake doc:app                            # Generate docs for the app -- also available doc:rails, doc:guides (options: TEMPLATE=/rdoc-template.rb, TITLE="Custom Title")
+    rake log:clear                          # Truncates all *.log files in log/ to zero bytes (specify which logs with LOGS=test,development)
+    rake middleware                         # Prints out your Rack middleware stack
+    rake notes                              # Enumerate all annotations (use notes:optimize, :fixme, :todo for focus)
+    rake notes:custom                       # Enumerate a custom annotation, specify with ANNOTATION=CUSTOM
+    rake rails:template                     # Applies the template supplied by LOCATION=(/path/to/template) or URL
+    rake rails:update                       # Update configs and some other initially generated files (or use just update:configs or update:bin)
+    rake routes                             # Print out all defined routes in match order, with names
+    rake secret                             # Generate a cryptographically secure secret key (this is typically used to generate a secret for cookie sessions)
+    rake stats                              # Report code statistics (KLOCs, etc) from the application or engine
+    rake test                               # Runs all tests in test folder
+    rake test:all                           # Run tests quickly by merging all types and not resetting db
+    rake test:all:db                        # Run tests quickly, but also reset db
+    rake test:db                            # Run tests quickly, but also reset db
+    rake time:zones:all                     # Displays all time zones, also available: time:zones:us, time:zones:local -- filter with OFFSET parameter, e.g., OFFSET=-6
+    rake tmp:clear                          # Clear session, cache, and socket files from tmp/ (narrow w/ tmp:sessions:clear, tmp:cache:clear, tmp:sockets:clear)
+    rake tmp:create                         # Creates tmp directories for sessions, cache, sockets, and pids
+
+These tasks are added by some of the gems. Custom tasks can also be added to the application by writing Ruby scripts and saving them under lib/tasks
+
+
+<i>Start WEBrick server</i>
 
 > $ bin/rails server
 
 Visit localhost:3000 in the browser
+
 
 <hr>
 
@@ -232,4 +336,6 @@ name, content fields are to hold the name and content of <i>a document</i>
     -- create_table(:documents)
        -> 0.0019s
     == 20160129144122 CreateDocuments: migrated (0.0021s) =========================
+
+
 
