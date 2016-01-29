@@ -1,5 +1,7 @@
 <i>Creating the application</i>
 
+Use the <i>rails new</i> command to create a new rails application
+
 > rails new document_management
   
       create  
@@ -147,6 +149,8 @@
 
 <hr>
 
+<b>The following app files and app structure is created by the <i>rails new</i> command.</b>
+
 <i>Contents of document_management</i>
 
 > $ cd document_management
@@ -164,6 +168,8 @@
 <hr>
 
 <i>Contents of the Gemfile</i>
+
+The Gemfile is also created by the <i>rails new</i> command
 
 >   $ cat Gemfile
 
@@ -214,6 +220,241 @@
       gem 'spring'
     end
 
+
+<hr>
+
+<i> Installing gems and dependencies <i>
+
+The <i>rails new</i> command automatically runs the following bundle command to install gems and their dependencies.
+> bin/bundle install
+
+The bundle command stores the version numbers of gems and their dependencies in <i>Gemfile.lock</i>
+
+<i> Contents of Gemfile.lock</i>
+
+> $ cat Gemfile.lock
+
+      GEM
+    remote: https://rubygems.org/
+    specs:
+      actionmailer (4.2.4)
+        actionpack (= 4.2.4)
+        actionview (= 4.2.4)
+        activejob (= 4.2.4)
+        mail (~> 2.5, >= 2.5.4)
+        rails-dom-testing (~> 1.0, >= 1.0.5)
+      actionpack (4.2.4)
+        actionview (= 4.2.4)
+        activesupport (= 4.2.4)
+        rack (~> 1.6)
+        rack-test (~> 0.6.2)
+        rails-dom-testing (~> 1.0, >= 1.0.5)
+        rails-html-sanitizer (~> 1.0, >= 1.0.2)
+      actionview (4.2.4)
+        activesupport (= 4.2.4)
+        builder (~> 3.1)
+        erubis (~> 2.7.0)
+        rails-dom-testing (~> 1.0, >= 1.0.5)
+        rails-html-sanitizer (~> 1.0, >= 1.0.2)
+      activejob (4.2.4)
+        activesupport (= 4.2.4)
+        globalid (>= 0.3.0)
+      activemodel (4.2.4)
+        activesupport (= 4.2.4)
+        builder (~> 3.1)
+      activerecord (4.2.4)
+        activemodel (= 4.2.4)
+        activesupport (= 4.2.4)
+        arel (~> 6.0)
+      activesupport (4.2.4)
+        i18n (~> 0.7)
+        json (~> 1.7, >= 1.7.7)
+        minitest (~> 5.1)
+        thread_safe (~> 0.3, >= 0.3.4)
+        tzinfo (~> 1.1)
+      arel (6.0.3)
+      binding_of_caller (0.7.2)
+        debug_inspector (>= 0.0.1)
+      builder (3.2.2)
+      byebug (8.2.1)
+      coffee-rails (4.1.1)
+        coffee-script (>= 2.2.0)
+        railties (>= 4.0.0, < 5.1.x)
+      coffee-script (2.4.1)
+        coffee-script-source
+        execjs
+      coffee-script-source (1.10.0)
+      concurrent-ruby (1.0.0)
+      debug_inspector (0.0.2)
+      erubis (2.7.0)
+      execjs (2.6.0)
+      globalid (0.3.6)
+        activesupport (>= 4.1.0)
+      i18n (0.7.0)
+      jbuilder (2.4.0)
+        activesupport (>= 3.0.0, < 5.1)
+        multi_json (~> 1.2)
+      jquery-rails (4.1.0)
+        rails-dom-testing (~> 1.0)
+        railties (>= 4.2.0)
+        thor (>= 0.14, < 2.0)
+      json (1.8.3)
+      loofah (2.0.3)
+        nokogiri (>= 1.5.9)
+      mail (2.6.3)
+        mime-types (>= 1.16, < 3)
+      mime-types (2.99)
+      mini_portile2 (2.0.0)
+      minitest (5.8.4)
+      multi_json (1.11.2)
+      nokogiri (1.6.7.2)
+        mini_portile2 (~> 2.0.0.rc2)
+      rack (1.6.4)
+      rack-test (0.6.3)
+        rack (>= 1.0)
+      rails (4.2.4)
+        actionmailer (= 4.2.4)
+        actionpack (= 4.2.4)
+        actionview (= 4.2.4)
+        activejob (= 4.2.4)
+        activemodel (= 4.2.4)
+        activerecord (= 4.2.4)
+        activesupport (= 4.2.4)
+        bundler (>= 1.3.0, < 2.0)
+        railties (= 4.2.4)
+        sprockets-rails
+      rails-deprecated_sanitizer (1.0.3)
+        activesupport (>= 4.2.0.alpha)
+      rails-dom-testing (1.0.7)
+        activesupport (>= 4.2.0.beta, < 5.0)
+        nokogiri (~> 1.6.0)
+        rails-deprecated_sanitizer (>= 1.0.1)
+      rails-html-sanitizer (1.0.3)
+        loofah (~> 2.0)
+      railties (4.2.4)
+        actionpack (= 4.2.4)
+        activesupport (= 4.2.4)
+        rake (>= 0.8.7)
+        thor (>= 0.18.1, < 2.0)
+      rake (10.5.0)
+      rdoc (4.2.1)
+        json (~> 1.4)
+      sass (3.4.21)
+      sass-rails (5.0.4)
+        railties (>= 4.0.0, < 5.0)
+        sass (~> 3.1)
+        sprockets (>= 2.8, < 4.0)
+        sprockets-rails (>= 2.0, < 4.0)
+        tilt (>= 1.1, < 3)
+      sdoc (0.4.1)
+        json (~> 1.7, >= 1.7.7)
+        rdoc (~> 4.0)
+      spring (1.6.2)
+      sprockets (3.5.2)
+        concurrent-ruby (~> 1.0)
+        rack (> 1, < 3)
+      sprockets-rails (3.0.1)
+        actionpack (>= 4.0)
+        activesupport (>= 4.0)
+        sprockets (>= 3.0.0)
+      sqlite3 (1.3.11)
+      thor (0.19.1)
+      thread_safe (0.3.5)
+      tilt (2.0.2)
+      turbolinks (2.5.3)
+        coffee-rails
+      tzinfo (1.2.2)
+        thread_safe (~> 0.1)
+      uglifier (2.7.2)
+        execjs (>= 0.3.0)
+        json (>= 1.8.0)
+      web-console (2.3.0)
+        activemodel (>= 4.0)
+        binding_of_caller (>= 0.7.2)
+        railties (>= 4.0)
+        sprockets-rails (>= 2.0, < 4.0)
+  
+  PLATFORMS
+    ruby
+  
+  DEPENDENCIES
+    byebug
+    coffee-rails (~> 4.1.0)
+    jbuilder (~> 2.0)
+    jquery-rails
+    rails (= 4.2.4)
+    sass-rails (~> 5.0)
+    sdoc (~> 0.4.0)
+    spring
+    sqlite3
+    turbolinks
+    uglifier (>= 1.3.0)
+    web-console (~> 2.0)
+  
+  BUNDLED WITH
+     1.10.6
+
+<hr>
+
+<i>List all gems with their versions<i>
+
+> bin/bundle list
+
+    Gems included by the bundle:
+    * actionmailer (4.2.4)
+    * actionpack (4.2.4)
+    * actionview (4.2.4)
+    * activejob (4.2.4)
+    * activemodel (4.2.4)
+    * activerecord (4.2.4)
+    * activesupport (4.2.4)
+    * arel (6.0.3)
+    * binding_of_caller (0.7.2)
+    * builder (3.2.2)
+    * bundler (1.10.6)
+    * byebug (8.2.1)
+    * coffee-rails (4.1.1)
+    * coffee-script (2.4.1)
+    * coffee-script-source (1.10.0)
+    * concurrent-ruby (1.0.0)
+    * debug_inspector (0.0.2)
+    * erubis (2.7.0)
+    * execjs (2.6.0)
+    * globalid (0.3.6)
+    * i18n (0.7.0)
+    * jbuilder (2.4.0)
+    * jquery-rails (4.1.0)
+    * json (1.8.3)
+    * loofah (2.0.3)
+    * mail (2.6.3)
+    * mime-types (2.99)
+    * mini_portile2 (2.0.0)
+    * minitest (5.8.4)
+    * multi_json (1.11.2)
+    * nokogiri (1.6.7.2)
+    * rack (1.6.4)
+    * rack-test (0.6.3)
+    * rails (4.2.4)
+    * rails-deprecated_sanitizer (1.0.3)
+    * rails-dom-testing (1.0.7)
+    * rails-html-sanitizer (1.0.3)
+    * railties (4.2.4)
+    * rake (10.5.0)
+    * rdoc (4.2.1)
+    * sass (3.4.21)
+    * sass-rails (5.0.4)
+    * sdoc (0.4.1)
+    * spring (1.6.2)
+    * sprockets (3.5.2)
+    * sprockets-rails (3.0.1)
+    * sqlite3 (1.3.11)
+    * thor (0.19.1)
+    * thread_safe (0.3.5)
+    * tilt (2.0.2)
+    * turbolinks (2.5.3)
+    * tzinfo (1.2.2)
+    * uglifier (2.7.2)
+    * web-console (2.3.0)
 
 <hr>
 
