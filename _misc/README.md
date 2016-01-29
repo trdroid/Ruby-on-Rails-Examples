@@ -12,7 +12,7 @@ The rails command can be used to
 
 <i>Create an application</i>
 
-> rails new <application name>
+> rails new \<application name\>
 
 <i>Starting up the server</i>
 
@@ -30,7 +30,8 @@ To avoid this extra typing, try *binstubs*
 
 The command above starts a WeBrick server. A WeBrick server supports testing applications during development and is not meant for large scale deployment. By default, it binds to localhost at 0.0.0.0 or 127.0.0.1 and is not accessible from other computers. 
 
-An address for the server to use can be specified with -b and -p (port) options to make it accessible from other computers. 
+An address for the server to use can be specified with -b and -p (port) options to make it accessible from other computers.
+
 <i> Server restart </i>
 
 In development mode, a server restart is not required for code changes.
@@ -49,6 +50,9 @@ New code can be generated using the sub-command <i>generate</i>
 <i>Launch console for a database</i>
 
 > rails dbconsole
+
+### rake
+
 
 
 ### gem
