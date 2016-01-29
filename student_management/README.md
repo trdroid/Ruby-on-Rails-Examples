@@ -143,3 +143,19 @@
              run  bundle exec spring binstub --all
     * bin/rake: spring inserted
     * bin/rails: spring inserted
+
+> $ cd student_management
+
+Contents of student_management
+
+
+Contents of student_management/bin
+
+> $ ls bin
+  
+    bundle  rails  rake  setup  spring
+
+Start WEBrick server
+
+
+
