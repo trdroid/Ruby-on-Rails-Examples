@@ -157,5 +157,46 @@ Contents of student_management/bin
 
 Start WEBrick server
 
+> $ bin/rails server
+
+Visit localhost:3000 in the browser
+
+### Scaffold
+
+> $ bin/rails generate scaffold Document name:string content:text
+
+    Running via Spring preloader in process 1544
+      invoke  active_record
+      create    db/migrate/20160129144122_create_documents.rb
+      create    app/models/document.rb
+      invoke    test_unit
+      create      test/models/document_test.rb
+      create      test/fixtures/documents.yml
+      invoke  resource_route
+       route    resources :documents
+      invoke  scaffold_controller
+      create    app/controllers/documents_controller.rb
+      invoke    erb
+      create      app/views/documents
+      create      app/views/documents/index.html.erb
+      create      app/views/documents/edit.html.erb
+      create      app/views/documents/show.html.erb
+      create      app/views/documents/new.html.erb
+      create      app/views/documents/_form.html.erb
+      invoke    test_unit
+      create      test/controllers/documents_controller_test.rb
+      invoke    helper
+      create      app/helpers/documents_helper.rb
+      invoke      test_unit
+      invoke    jbuilder
+      create      app/views/documents/index.json.jbuilder
+      create      app/views/documents/show.json.jbuilder
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/documents.coffee
+      invoke    scss
+      create      app/assets/stylesheets/documents.scss
+      invoke  scss
+      create    app/assets/stylesheets/scaffolds.scss
 
 
