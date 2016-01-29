@@ -223,9 +223,10 @@ The Gemfile is also created by the <i>rails new</i> command
 
 <hr>
 
-<i> Installing gems and dependencies <i>
+<i> Installing gems and dependencies </i>
 
 The <i>rails new</i> command automatically runs the following bundle command to install gems and their dependencies.
+
 > bin/bundle install
 
 The bundle command stores the version numbers of gems and their dependencies in <i>Gemfile.lock</i>
