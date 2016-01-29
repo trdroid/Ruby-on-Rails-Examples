@@ -1,5 +1,5 @@
 
-> rails new student_management
+> rails new document_management
   
       create  
       create  README.rdoc
@@ -144,12 +144,15 @@
     * bin/rake: spring inserted
     * bin/rails: spring inserted
 
-> $ cd student_management
+> $ cd document_management
 
-Contents of student_management
+Contents of document_management
 
+> $ ls
+  
+    app  bin  config  config.ru  db  Gemfile  Gemfile.lock  lib  log  public  Rakefile  README.rdoc  test  tmp  vendor
 
-Contents of student_management/bin
+Contents of document_management/bin
 
 > $ ls bin
   
