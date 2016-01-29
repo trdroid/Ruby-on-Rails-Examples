@@ -144,6 +144,8 @@
     * bin/rake: spring inserted
     * bin/rails: spring inserted
 
+<hr>
+
 > $ cd document_management
 
 Contents of document_management
@@ -158,11 +160,15 @@ Contents of document_management/bin
   
     bundle  rails  rake  setup  spring
 
+<hr>
+
 Start WEBrick server
 
 > $ bin/rails server
 
 Visit localhost:3000 in the browser
+
+<hr>
 
 ### Scaffold
 
