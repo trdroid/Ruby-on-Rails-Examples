@@ -264,6 +264,7 @@
 
 These tasks are added by some of the gems. Custom tasks can also be added to the application by writing Ruby scripts and saving them under lib/tasks
 
+<hr>
 
 <i>Start WEBrick server</i>
 
@@ -271,10 +272,9 @@ These tasks are added by some of the gems. Custom tasks can also be added to the
 
 Visit localhost:3000 in the browser
 
-
 <hr>
 
-### Scaffold
+<i> Create a scaffold </i>
 
 Create a scaffold for a Document. The following command specifies that a Document has a name and content.
 
