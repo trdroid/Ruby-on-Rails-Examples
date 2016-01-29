@@ -578,6 +578,19 @@ name, content fields are to hold the name and content of <i>a document</i>
     == 20160129144122 CreateDocuments: migrated (0.0021s) =========================
 
 
-# Models
+# Model
+
+<i>app/models/document.rb</i>
+
+```ruby
+class Document < ActiveRecord::Base
+end
+```
+
+The <i>Documents</i> table in the database is associated with the Document class. 
+
+Each row of the table is represented by an instance of the Document class and each column is represented by an attribute of that object. 
+
+
 
 
