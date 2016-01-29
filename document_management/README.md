@@ -151,15 +151,13 @@ Use the <i>rails new</i> command to create a new rails application
 
 <b>The following app files and app structure is created by the <i>rails new</i> command.</b>
 
-<i>Contents of document_management</i>
+<i>Contents of the Rails Application</i>
 
 > $ cd document_management
 
 > $ ls
   
     app  bin  config  config.ru  db  Gemfile  Gemfile.lock  lib  log  public  Rakefile  README.rdoc  test  tmp  vendor
-
-<i>Contents of document_management/bin</i>
 
 > $ ls bin
   
@@ -579,5 +577,7 @@ name, content fields are to hold the name and content of <i>a document</i>
        -> 0.0019s
     == 20160129144122 CreateDocuments: migrated (0.0021s) =========================
 
+
+# Models
 
 
