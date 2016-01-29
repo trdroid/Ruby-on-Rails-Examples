@@ -146,9 +146,9 @@
 
 <hr>
 
-> $ cd document_management
-
 Contents of document_management
+
+> $ cd document_management
 
 > $ ls
   
@@ -171,6 +171,10 @@ Visit localhost:3000 in the browser
 <hr>
 
 ### Scaffold
+
+Create a scaffold for a Document. The following command specifies that a Document has a name and content.
+
+The name would be a string in the database where as the content is a text field. 
 
 > $ bin/rails generate scaffold Document name:string content:text
 
@@ -208,4 +212,24 @@ Visit localhost:3000 in the browser
       invoke  scss
       create    app/assets/stylesheets/scaffolds.scss
 
+Run rake to run the database migration created in the previous step. This would create a table named <i>document</i> with the fields: 
+* id
+* name
+* content
+* created_at
+* updated_at
+
+id is a unique and auto-incrementing integer that identifies each row uniquely.
+
+name, content fields are to hold the name and content of <i>a document</i>
+
+created_at and updated_at are fields that the framework deals with. They are used to track the creation and last updated timestamps. 
+
+> $ bin/rake db:migrate
+
+    Running via Spring preloader in process 2763
+    == 20160129144122 CreateDocuments: migrating ==================================
+    -- create_table(:documents)
+       -> 0.0019s
+    == 20160129144122 CreateDocuments: migrated (0.0021s) =========================
 
