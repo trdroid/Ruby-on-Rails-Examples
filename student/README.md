@@ -1,4 +1,6 @@
-> rails new student
+
+
+> $ rails new student
 
 >       create  
       create  README.rdoc
@@ -142,3 +144,15 @@
              run  bundle exec spring binstub --all
     * bin/rake: spring inserted
     * bin/rails: spring inserted
+
+> cd student
+
+> student$ ls bin
+
+      bundle  rails  rake  setup  spring    
+
+
+Start the WEBrick server
+
+> bin/rails server
+
