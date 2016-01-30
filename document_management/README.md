@@ -654,6 +654,29 @@ The create method can also be passed a block.
 
 <i>Read</i>
 
+To return all the rows, call <i>all</i> method on the Document class
+
+> 
+    irb(main):013:0> Document.all
+      Document Load (0.4ms)  SELECT "documents".* FROM "documents"
+    => #<ActiveRecord::Relation [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">, #<Document id: 2, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 00:17:04", updated_at: "2016-01-30 00:17:04">, #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">]>
+
+The <i>all</i> method returns an <i>Active Record Relation</i> which contains an array of all documents.
+
+>
+    irb(main):003:0> docs = Document.all
+      Document Load (0.4ms)  SELECT "documents".* FROM "documents"
+    => #<ActiveRecord::Relation [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">, #<Document id: 2, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 00:17:04", updated_at: "2016-01-30 00:17:04">, #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">]>
+
+Store the <i>Active Record Relation</i> instance, which represents an array of all documents, in a variable. <i>first</i> and <i>last</i> methods can be invoked on an Action Record Relation instance, which returns the first and last entries in the array respectively.
+
+>
+      irb(main):004:0> docs.first
+    => #<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">
+    irb(main):005:0> docs.last
+    => #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">
+
+
 To return the first record in the documents table, call the <i>first</i> method on the Document class
 
 > 
@@ -669,13 +692,6 @@ To return the last record in the documents table, call the <i>last</i> method on
     irb(main):012:0> Document.last
       Document Load (0.5ms)  SELECT  "documents".* FROM "documents"  ORDER BY "documents"."id" DESC LIMIT 1
     => #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">
-
-To return all the rows, call <i>all</i> method on the Document class
-
-> 
-    irb(main):013:0> Document.all
-      Document Load (0.4ms)  SELECT "documents".* FROM "documents"
-    => #<ActiveRecord::Relation [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">, #<Document id: 2, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 00:17:04", updated_at: "2016-01-30 00:17:04">, #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">]>
 
 To retrieve a record by id, call <i>find</i> method on the Document class
 
