@@ -710,6 +710,17 @@ Attempting to find by an id that does not exist results in an ActiveRecord::Reco
     	from /usr/local/lib/ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
     	from -e:1:in `<main>'
 
+To find a record by any other field, use the <i>where</i> method on the Document class.
+
+> 
+      irb(main):001:0> Document.where(name:"doc1").all
+      Document Load (0.3ms)  SELECT "documents".* FROM "documents" WHERE "documents"."name" = ?  [["name", "doc1"]]
+    => #<ActiveRecord::Relation []>
+    irb(main):002:0> Document.where(name:"doc1").first
+      Document Load (0.1ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."name" = ?  ORDER BY "documents"."id" ASC LIMIT 1  [["name", "doc1"]]
+    => nil
+
+
 <i>To exit the Rails console<i>
 
 > irb(main):001:0\> exit
