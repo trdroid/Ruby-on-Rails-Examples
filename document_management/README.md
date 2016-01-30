@@ -591,6 +591,10 @@ end
 
 ### Performing CRUD operations
 
+http://guides.rubyonrails.org/active_record_basics.html
+
+<b> The methods that will be discussed are implemented in the ActiveRecord class.
+
 The <i>Document</i> class is associated with the <i>Documents</i> table in the database.
 
 Each row of the <i>Documents</i> table is represented by an instance of the <i>Document</i> class and each column is represented by an attribute of that object. The value associated with a particular column can be retrieved by calling the attribute method on that object.
@@ -648,6 +652,23 @@ The create method can also be passed a block.
        (102.6ms)  commit transaction
     => true
 
+<i>Read</i>
+
+To return the first record in the documents table, call the <i>first</i> method on the Document class
+
+> 
+    irb(main):011:0> Document.first
+      Document Load (0.4ms)  SELECT  "documents".* FROM "documents"  ORDER BY "documents"."id" ASC LIMIT 1
+    => #<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">
+    irb(main):012:0> Document.last
+
+
+To return the last record in the documents table, call the <i>last</i> method on the Document class
+
+>
+    irb(main):012:0> Document.last
+      Document Load (0.5ms)  SELECT  "documents".* FROM "documents"  ORDER BY "documents"."id" DESC LIMIT 1
+    => #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">
 
 <i>To exit the Rails console<i>
 
