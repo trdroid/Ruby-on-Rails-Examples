@@ -593,7 +593,7 @@ end
 
 http://guides.rubyonrails.org/active_record_basics.html
 
-<b> The methods that will be discussed are implemented in the ActiveRecord class.
+<b> The methods that will be discussed are implemented in the ActiveRecord class. </b>
 
 The <i>Document</i> class is associated with the <i>Documents</i> table in the database.
 
