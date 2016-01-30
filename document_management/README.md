@@ -684,6 +684,31 @@ To retrieve a record by id, call <i>find</i> method on the Document class
       Document Load (0.6ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 2]]
     => #<Document id: 2, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 00:17:04", updated_at: "2016-01-30 00:17:04">
 
+Attempting to find by an id that does not exist results in an ActiveRecord::RecordNotFound exception
+
+>
+    irb(main):015:0> Document.find 10
+      Document Load (0.3ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 10]]
+    ActiveRecord::RecordNotFound: Couldn't find Document with 'id'=10
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/core.rb:155:in `find'
+    	from (irb):15
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands/console.rb:110:in `start'
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands/console.rb:9:in `start'
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:68:in `console'
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands.rb:17:in `<top (required)>'
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:274:in `require'
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:274:in `block in require'
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:240:in `load_dependency'
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:274:in `require'
+    	from /home/droid/onGit/Ruby-on-Rails/document_management/bin/rails:9:in `<top (required)>'
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:268:in `load'
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:268:in `block in load'
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:240:in `load_dependency'
+    	from /usr/local/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:268:in `load'
+    	from /usr/local/lib/ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+    	from /usr/local/lib/ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+    	from -e:1:in `<main>'
 
 <i>To exit the Rails console<i>
 
