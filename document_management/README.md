@@ -617,6 +617,7 @@ A document record can be created by
 * assigning values to the attributes and 
 * calling the <i>save</i> method on the instance to commit the record to the database
 
+The following are the steps:
 
     irb(main):026:0> doc2 = Document.new
     => #<Document id: nil, name: nil, content: nil, created_at: nil, updated_at: nil>
