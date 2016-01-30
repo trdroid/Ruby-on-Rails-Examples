@@ -395,7 +395,7 @@ The bundle command stores the version numbers of gems and their dependencies in 
 
 <hr>
 
-<i>List all gems with their versions<i>
+<i>List all gems with their versions</i>
 
 > bin/bundle list
 
