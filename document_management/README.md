@@ -587,9 +587,42 @@ class Document < ActiveRecord::Base
 end
 ```
 
-The <i>Documents</i> table in the database is associated with the Document class. 
+<hr>
 
-Each row of the table is represented by an instance of the Document class and each column is represented by an attribute of that object. 
+### Performing CRUD operations
+
+The <i>Document</i> class is associated with the <i>Documents</i> table in the database.
+
+Each row of the <i>Documents</i> table is represented by an instance of the <i>Document</i> class and each column is represented by an attribute of that object. The value associated with a particular column can be retrieved by calling the attribute method on that object.
+
+<i>Start the Rails console</i>
+
+> bin/rails console
+
+    Running via Spring preloader in process 5433
+    Loading development environment (Rails 4.2.4)
+    irb(main):001:0> 
+
+
+Starting the Rails console from the application's root loads the application's environment
+
+<i>Creating a record</i>
+
+The create method accepts a hash of attribute-value pairs and inserts a row in a corresponding table.
+
+> irb(main):001:0\> Document.create(name: "Doc1", content: "Hello World!")
+
+    (0.2ms)  begin transaction
+    SQL (16.0ms)  INSERT INTO "documents" ("name", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Doc1"], ["content", "Hello World!"], ["created_at", "2016-01-30 00:04:22.842437"], ["updated_at", "2016-01-30 00:04:22.842437"]]
+     (102.1ms)  commit transaction
+  => #<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">
+
+
+<i>To exit the Rails console<i>
+
+> irb(main):001:0\> exit
+
+
 
 
 
