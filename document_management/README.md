@@ -670,6 +670,21 @@ To return the last record in the documents table, call the <i>last</i> method on
       Document Load (0.5ms)  SELECT  "documents".* FROM "documents"  ORDER BY "documents"."id" DESC LIMIT 1
     => #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">
 
+To return all the rows, call <i>all</i> method on the Document class
+
+> 
+    irb(main):013:0> Document.all
+      Document Load (0.4ms)  SELECT "documents".* FROM "documents"
+    => #<ActiveRecord::Relation [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">, #<Document id: 2, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 00:17:04", updated_at: "2016-01-30 00:17:04">, #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">]>
+
+To retrieve a record by id, call <i>find</i> method on the Document class
+
+>
+    irb(main):014:0> Document.find 2
+      Document Load (0.6ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 2]]
+    => #<Document id: 2, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 00:17:04", updated_at: "2016-01-30 00:17:04">
+
+
 <i>To exit the Rails console<i>
 
 > irb(main):001:0\> exit
