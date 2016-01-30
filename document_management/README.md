@@ -616,20 +616,18 @@ A document record can be created by
 * creating an instance of the Document class
 * assigning values to the attributes and 
 * calling the <i>save</i> method on the instance to commit the record to the database
- 
 
-
-    irb(main):002:0> doc2 = Document.new
-    => #<Document id: nil, name: nil, content: nil, created_at: nil, updated_at: nil>
-    irb(main):003:0> doc2.name="Doc2"
-    => "Doc2"
-    irb(main):004:0> doc2.content="This is document2!"
-    => "This is document2!"
-    irb(main):005:0> doc2.save
-       (0.2ms)  begin transaction
-      SQL (0.5ms)  INSERT INTO "documents" ("name", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Doc2"], ["content", "This is document2!"], ["created_at", "2016-01-30 00:17:04.940546"], ["updated_at", "2016-01-30 00:17:04.940546"]]
-       (90.0ms)  commit transaction
-    => true
+        irb(main):002:0> doc2 = Document.new
+        => #<Document id: nil, name: nil, content: nil, created_at: nil, updated_at: nil>
+        irb(main):003:0> doc2.name="Doc2"
+        => "Doc2"
+        irb(main):004:0> doc2.content="This is document2!"
+        => "This is document2!"
+        irb(main):005:0> doc2.save
+           (0.2ms)  begin transaction
+          SQL (0.5ms)  INSERT INTO "documents" ("name", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Doc2"], ["content", "This is document2!"], ["created_at", "2016-01-30 00:17:04.940546"], ["updated_at", "2016-01-30 00:17:04.940546"]]
+           (90.0ms)  commit transaction
+        => true
 
 The create method accepts a hash of attribute-value pairs and inserts a row in a corresponding table.
 
