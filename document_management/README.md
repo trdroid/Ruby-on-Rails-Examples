@@ -630,10 +630,10 @@ The create method accepts a hash of attribute-value pairs and inserts a row in a
 
 > irb(main):001:0\> Document.create(name: "Doc1", content: "Hello World!")
 
-    (0.2ms)  begin transaction
-    SQL (16.0ms)  INSERT INTO "documents" ("name", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Doc1"], ["content", "Hello World!"], ["created_at", "2016-01-30 00:04:22.842437"], ["updated_at", "2016-01-30 00:04:22.842437"]]
-     (102.1ms)  commit transaction
-  => #<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">
+      (0.2ms)  begin transaction
+      SQL (16.0ms)  INSERT INTO "documents" ("name", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Doc1"], ["content", "Hello World!"], ["created_at", "2016-01-30 00:04:22.842437"], ["updated_at", "2016-01-30 00:04:22.842437"]]
+       (102.1ms)  commit transaction
+    => #<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">
 
 The create method can also be passed a block.
 
