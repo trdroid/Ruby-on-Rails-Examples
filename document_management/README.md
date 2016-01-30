@@ -616,8 +616,9 @@ A document record can be created by
 * creating an instance of the Document class
 * assigning values to the attributes and 
 * calling the <i>save</i> method on the instance to commit the record to the database
+ 
 
->   
+
     irb(main):002:0> doc2 = Document.new
     => #<Document id: nil, name: nil, content: nil, created_at: nil, updated_at: nil>
     irb(main):003:0> doc2.name="Doc2"
@@ -632,8 +633,7 @@ A document record can be created by
 
 The create method accepts a hash of attribute-value pairs and inserts a row in a corresponding table.
 
-> irb(main):001:0\> Document.create(name: "Doc1", content: "Hello World!")
-
+    irb(main):001:0\> Document.create(name: "Doc1", content: "Hello World!")
       (0.2ms)  begin transaction
       SQL (16.0ms)  INSERT INTO "documents" ("name", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Doc1"], ["content", "Hello World!"], ["created_at", "2016-01-30 00:04:22.842437"], ["updated_at", "2016-01-30 00:04:22.842437"]]
        (102.1ms)  commit transaction
@@ -641,7 +641,7 @@ The create method accepts a hash of attribute-value pairs and inserts a row in a
 
 The create method can also be passed a block.
 
-    > irb(main):006:0> doc3 = Document.new do |doc|
+    irb(main):006:0> doc3 = Document.new do |doc|
     irb(main):007:1* doc.name="doc3"
     irb(main):008:1> doc.content="This is document3"
     irb(main):009:1> end
@@ -656,21 +656,18 @@ The create method can also be passed a block.
 
 To return all the rows, call <i>all</i> method on the Document class
 
-> 
     irb(main):013:0> Document.all
       Document Load (0.4ms)  SELECT "documents".* FROM "documents"
     => #<ActiveRecord::Relation [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">, #<Document id: 2, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 00:17:04", updated_at: "2016-01-30 00:17:04">, #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">]>
 
 The <i>all</i> method returns an <i>Active Record Relation</i> which contains an array of all documents.
 
->
     irb(main):003:0> docs = Document.all
       Document Load (0.4ms)  SELECT "documents".* FROM "documents"
     => #<ActiveRecord::Relation [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">, #<Document id: 2, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 00:17:04", updated_at: "2016-01-30 00:17:04">, #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">]>
 
 Store the <i>Active Record Relation</i> instance, which represents an array of all documents, in a variable. <i>first</i> and <i>last</i> methods can be invoked on an Action Record Relation instance, which returns the first and last entries in the array respectively.
 
->
       irb(main):004:0> docs.first
     => #<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">
     irb(main):005:0> docs.last
@@ -679,7 +676,6 @@ Store the <i>Active Record Relation</i> instance, which represents an array of a
 
 To return the first record in the documents table, call the <i>first</i> method on the Document class
 
-> 
     irb(main):011:0> Document.first
       Document Load (0.4ms)  SELECT  "documents".* FROM "documents"  ORDER BY "documents"."id" ASC LIMIT 1
     => #<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">
@@ -688,21 +684,18 @@ To return the first record in the documents table, call the <i>first</i> method 
 
 To return the last record in the documents table, call the <i>last</i> method on the Document class
 
->
     irb(main):012:0> Document.last
       Document Load (0.5ms)  SELECT  "documents".* FROM "documents"  ORDER BY "documents"."id" DESC LIMIT 1
     => #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">
 
 To retrieve a record by id, call <i>find</i> method on the Document class
 
->
     irb(main):014:0> Document.find 2
       Document Load (0.6ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 2]]
     => #<Document id: 2, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 00:17:04", updated_at: "2016-01-30 00:17:04">
 
 Attempting to find by an id that does not exist results in an ActiveRecord::RecordNotFound exception
 
->
     irb(main):015:0> Document.find 10
       Document Load (0.3ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 10]]
     ActiveRecord::RecordNotFound: Couldn't find Document with 'id'=10
@@ -728,7 +721,6 @@ Attempting to find by an id that does not exist results in an ActiveRecord::Reco
 
 To find a record by any other field, use the <i>where</i> method on the Document class.
 
-> 
       irb(main):001:0> Document.where(name:"doc1").all
       Document Load (0.3ms)  SELECT "documents".* FROM "documents" WHERE "documents"."name" = ?  [["name", "doc1"]]
     => #<ActiveRecord::Relation []>
@@ -739,7 +731,7 @@ To find a record by any other field, use the <i>where</i> method on the Document
 
 <i>To exit the Rails console<i>
 
-> irb(main):001:0\> exit
+     irb(main):001:0\> exit
 
 
 
