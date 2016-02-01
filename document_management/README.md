@@ -1,5 +1,11 @@
 <i>Creating the application</i>
 
+    $ rails --version
+    Rails 4.2.4
+    
+    $ bin/rails --version
+    Rails 4.2.4
+
 Use the <i>rails new</i> command to create a new rails application
 
 > rails new document_management
