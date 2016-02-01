@@ -588,6 +588,8 @@ name, content fields are to hold the name and content of <i>a document</i>
 
 <i>app/models/document.rb</i>
 
+Models inherit from the ActiveRecord class, which provides methods for database operations. 
+
 ```ruby
 class Document < ActiveRecord::Base
 end
@@ -616,7 +618,7 @@ Each row of the <i>Documents</i> table is represented by an instance of the <i>D
 
 Starting the Rails console from the application's root loads the application's environment
 
-<i>Creating a record</i>
+<b><i>Creating a record</i></b>
 
 A document record can be created by 
 * creating an instance of the Document class
@@ -659,7 +661,7 @@ The create method can also be passed a block.
        (102.6ms)  commit transaction
     => true
 
-<i>Read</i>
+<b><i>Read</i></b>
 
 To return all the rows, call <i>all</i> method on the Document class
 
@@ -669,11 +671,12 @@ To return all the rows, call <i>all</i> method on the Document class
 
 The <i>all</i> method returns an <i>Active Record Relation</i> which contains an array of all documents.
 
+Store the <i>Active Record Relation</i> instance, which represents an array of all documents, in a variable. <i>first</i> and <i>last</i> methods can be invoked on an Action Record Relation instance, which returns the first and last entries in the array respectively.
+
     irb(main):003:0> docs = Document.all
       Document Load (0.4ms)  SELECT "documents".* FROM "documents"
     => #<ActiveRecord::Relation [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">, #<Document id: 2, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 00:17:04", updated_at: "2016-01-30 00:17:04">, #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">]>
 
-Store the <i>Active Record Relation</i> instance, which represents an array of all documents, in a variable. <i>first</i> and <i>last</i> methods can be invoked on an Action Record Relation instance, which returns the first and last entries in the array respectively.
 
       irb(main):004:0> docs.first
     => #<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">
@@ -681,21 +684,16 @@ Store the <i>Active Record Relation</i> instance, which represents an array of a
     => #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">
 
 
-To return the first record in the documents table, call the <i>first</i> method on the Document class
+To return the first and last records in the documents table, instead of fetching all the records and calling <i>first</i> and <i>last</i> method on an <i>ActiveRecord::Relation</i> instance, call the <i>first</i> method on the Document class
 
     irb(main):011:0> Document.first
       Document Load (0.4ms)  SELECT  "documents".* FROM "documents"  ORDER BY "documents"."id" ASC LIMIT 1
     => #<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">
     irb(main):012:0> Document.last
-
-
-To return the last record in the documents table, call the <i>last</i> method on the Document class
-
-    irb(main):012:0> Document.last
       Document Load (0.5ms)  SELECT  "documents".* FROM "documents"  ORDER BY "documents"."id" DESC LIMIT 1
     => #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">
 
-To retrieve a record by id, call <i>find</i> method on the Document class
+To retrieve a record by id, call <i>find</i> method on the Document class and pass the id of the record that has to be fetched
 
     irb(main):014:0> Document.find 2
       Document Load (0.6ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 2]]
@@ -726,14 +724,52 @@ Attempting to find by an id that does not exist results in an ActiveRecord::Reco
     	from /usr/local/lib/ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
     	from -e:1:in `<main>'
 
-To find a record by any other field, use the <i>where</i> method on the Document class.
+To find a record by any other field, use the <i>where</i> method on the Document class. The where method returns an <i>ActiveRecord::Relation</i> instance which implies the possibility of more than one row being returned and that the methods of <i>ActiveRecord::Relation</i> can be chained with the <i>where</i> call. 
 
-      irb(main):001:0> Document.where(name:"doc1").all
-      Document Load (0.3ms)  SELECT "documents".* FROM "documents" WHERE "documents"."name" = ?  [["name", "doc1"]]
+Chaining the first, last, and all methods with the <i>where</i> method respectively returns the first, last and all rows of the returned matching rows.
+
+    irb(main):005:0> Document.where(name:"Doc1").first
+      Document Load (0.3ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."name" = ?  ORDER BY "documents"."id" ASC LIMIT 1  [["name", "Doc1"]]
+    => #<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">
+    irb(main):006:0> Document.where(name:"Doc1").last
+      Document Load (0.4ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."name" = ?  ORDER BY "documents"."id" DESC LIMIT 1  [["name", "Doc1"]]
+    => #<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">
+    irb(main):007:0> Document.where(name:"Doc1").all
+      Document Load (0.5ms)  SELECT "documents".* FROM "documents" WHERE "documents"."name" = ?  [["name", "Doc1"]]
+    => #<ActiveRecord::Relation [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">]>
+
+<i>Limiting Search Results</i>
+
+To limit the number of rows returned, call the <i>limit</i> method on the Model (Document) class. It returns an <i>ActiveRecord::Relation</i> instance.
+
+    irb(main):009:0> Document.limit(2)
+      Document Load (0.2ms)  SELECT  "documents".* FROM "documents" LIMIT 2
+    => #<ActiveRecord::Relation [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">, #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">]>
+    irb(main):010:0> Document.limit(3)
+
+The order the returned results, chain the <i>order</i> method of <i>ActiveRecord::Relation</i> with the <i>limit</i> method.
+
+    irb(main):011:0> Document.limit(2).order "created_at ASC"
+      Document Load (0.5ms)  SELECT  "documents".* FROM "documents"  ORDER BY created_at ASC LIMIT 2
+    => #<ActiveRecord::Relation [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">, #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">]>
+
+To skip the first x records, use the <i>offset</i> method on the <i>ActiveRecord::Relation</i> instance returned by the <i>limit</i> method called on the Model (Document) class.
+
+In the following example, the first record is skipped 
+
+    irb(main):012:0> Document.limit(2).offset(1)
+      Document Load (0.5ms)  SELECT  "documents".* FROM "documents" LIMIT 2 OFFSET 1
+    => #<ActiveRecord::Relation [#<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">, #<Document id: 4, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 03:24:39", updated_at: "2016-01-30 03:24:39">]>
+
+Skipping more than existing number of rows, returns an empty <i>ActiveRecord::Relation</i> instance
+
+    irb(main):013:0> Document.limit(2).offset(5)
+      Document Load (0.4ms)  SELECT  "documents".* FROM "documents" LIMIT 2 OFFSET 5
     => #<ActiveRecord::Relation []>
-    irb(main):002:0> Document.where(name:"doc1").first
-      Document Load (0.1ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."name" = ?  ORDER BY "documents"."id" ASC LIMIT 1  [["name", "doc1"]]
-    => nil
+
+
+<b><i>Delete</i></b>
+
 
 
 <i>To exit the Rails console<i>
