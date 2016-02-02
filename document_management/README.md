@@ -562,7 +562,26 @@ The name would be a string in the database where as the content is a text field.
       invoke  scss
       create    app/assets/stylesheets/scaffolds.scss
 
-Run rake to run the database migration created in the previous step. This would create a table named <i>document</i> with the fields: 
+The scaffold generatator generates a file for migration (under app/db/migrate directory) along with other required files. Migration file names begin with a timestamp, which indicate the time they are created.
+
+Database Migrations are used when changes have to be made to the structure of the database. A complete record of changes done to the database as the application is built is stored in Database Migrations. 
+
+> $ cat db/migrate/20160129144122_create_documents.rb
+
+```ruby
+class CreateDocuments < ActiveRecord::Migration
+  def change
+    create_table :documents do |t|
+      t.string :name
+      t.text :content
+
+      t.timestamps null: false
+    end
+  end
+end
+```
+
+The <i>change</i> method as shown above would create a table named <i>documents</i> with the fields: 
 * id
 * name
 * content
@@ -575,6 +594,12 @@ name, content fields are to hold the name and content of <i>a document</i>
 
 <b>created_at and updated_at</b> are fields that the framework deals with. They are used to track the creation and last updated timestamps. 
 
+Run the migration task db:migrate using rake to run all the pending database migrations. Rails keeps track of which migrations have been run by storing the timestamps of the executed migrations in a database table called <i>schema_migrations</i>.
+
+Running a migration executes the <i>change</i> method, which in this case, as shown above, creates a table called <i>documents</i>
+
+Run the rollback task db:rollback to undo a database migration with a mistake in it. 
+
 > $ bin/rake db:migrate
 
     Running via Spring preloader in process 2763
@@ -583,6 +608,24 @@ name, content fields are to hold the name and content of <i>a document</i>
        -> 0.0019s
     == 20160129144122 CreateDocuments: migrated (0.0021s) =========================
 
+Rails stores the current state of the database in the file db/schema.rb. This file is updated when a database migration is run and hence should not be edited manually. 
+
+> $ cat db/schema.rb
+
+```ruby
+ActiveRecord::Schema.define(version: 20160129144122) do
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "name"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+end
+```
+
+To setup a new, empty database for an application, instead of running individual migrations, the rake task db:schema:load can be run.
 
 # Model
 
@@ -600,6 +643,8 @@ end
 ### Performing CRUD operations
 
 http://guides.rubyonrails.org/active_record_basics.html
+
+http://api.rubyonrails.org/
 
 <b> The methods that will be discussed are implemented in the ActiveRecord class. </b>
 
@@ -748,7 +793,7 @@ The call <i>first</i> on an <i>ActiveRecord::Relation</i> instance returns the M
       Document Load (0.4ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."name" = ?  ORDER BY "documents"."id" ASC LIMIT 1  [["name", "Doc1"]]
     => "Document"
 
-The <i>to_s</i> method on an <i>ActiveRecord::Relation</i> instance returns the sql query in string
+The <i>to_sql</i> method on an <i>ActiveRecord::Relation</i> instance returns the sql query in string
 
     irb(main):044:0> Document.where(name:"Doc1").to_sql
     => "SELECT \"documents\".* FROM \"documents\" WHERE \"documents\".\"name\" = 'Doc1'"
@@ -888,12 +933,29 @@ Find the record and save the reference in a variable and call the <i>destroy</i>
       Document Load (0.5ms)  SELECT "documents".* FROM "documents"
     => #<ActiveRecord::Relation []>
 
+<i>Other methods</i>
 
+The following shows the usage of <i>minimum</i>, <i>maximum</i> and <i>count</i> methods.
 
+    irb(main):072:0* Document.all
+      Document Load (0.5ms)  SELECT "documents".* FROM "documents"
+    => #<ActiveRecord::Relation [#<Document id: 6, name: "Doc1", content: "Hello World!", created_at: "2016-02-02 02:01:22", updated_at: "2016-02-02 02:01:22">, #<Document id: 7, name: "Doc2", content: "Hello World in Doc2!", created_at: "2016-02-02 02:01:33", updated_at: "2016-02-02 02:01:33">, #<Document id: 8, name: "Doc3", content: "Hello World in Doc3!", created_at: "2016-02-02 02:01:41", updated_at: "2016-02-02 02:01:41">]>
+    irb(main):073:0> Document.minimum :created_at
+       (0.5ms)  SELECT MIN("documents"."created_at") FROM "documents"
+    => Tue, 02 Feb 2016 02:01:22 UTC +00:00
+    irb(main):074:0> Document.maximum :created_at
+       (0.6ms)  SELECT MAX("documents"."created_at") FROM "documents"
+    => Tue, 02 Feb 2016 02:01:41 UTC +00:00
+    irb(main):075:0> Document.count
+       (1.0ms)  SELECT COUNT(*) FROM "documents"
+    => 3
 
 <i>To exit the Rails console<i>
 
      irb(main):001:0\> exit
+
+<hr>
+
 
 
 
