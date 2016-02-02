@@ -1023,6 +1023,10 @@ class AddingWhoPublishedThisDocumentToDocuments < ActiveRecord::Migration
 end
 ```
 
+Active Record <i>migrations</i> provides the add_column method which expects the name of the table, the column name and its type as arguments. 
+
+Other methods provided are remove_column, rename_column, change_column for changing options related to a column like its type, default value etc.
+
 > $ bin/rake db:migrate
 
     Running via Spring preloader in process 26282
@@ -1031,6 +1035,25 @@ end
        -> 0.0011s
     == 20160202175612 AddingWhoPublishedThisDocumentToDocuments: migrated (0.0013s) 
 
+Notice that the db/schema.rb file is updated with the new columns
+
+$ > cat db/schema.rb
+
+```ruby
+ActiveRecord::Schema.define(version: 20160202175612) do
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "name"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "author"
+    t.string   "publisher"
+  end
+
+end
+```
+
 Check to see if the columns have been added:
 
 > $ bin/rails console
@@ -1038,3 +1061,6 @@ Check to see if the columns have been added:
     irb(main):001:0> Document.all
       Document Load (1.7ms)  SELECT "documents".* FROM "documents"
     => #<ActiveRecord::Relation [#<Document id: 6, name: "Doc1", content: "Hello World!", created_at: "2016-02-02 02:01:22", updated_at: "2016-02-02 02:01:22", author: nil, publisher: nil>, #<Document id: 7, name: "Doc2", content: "Hello World in Doc2!", created_at: "2016-02-02 02:01:33", updated_at: "2016-02-02 02:01:33", author: nil, publisher: nil>, #<Document id: 8, name: "Doc3", content: "Hello World in Doc3!", created_at: "2016-02-02 02:01:41", updated_at: "2016-02-02 02:01:41", author: nil, publisher: nil>]>
+
+<hr>
+
