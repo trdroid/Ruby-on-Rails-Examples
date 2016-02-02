@@ -799,6 +799,7 @@ Updating a record is equivalent to
 * updating values and 
 * calling <i>save</i> method to save it back to the table
 
+Updating a record using <i>save</i> method
 
     irb(main):050:0> Document.all
       Document Load (0.5ms)  SELECT "documents".* FROM "documents"
@@ -823,6 +824,7 @@ Updating a record can also be done by
 * reading a record into a variable
 * calling <i>update</i> method by passing it a hash of attribute-value pairs which updates the values and saves the updated record back to the table 
 
+Updating a record using <i>update</i> method
 
     irb(main):055:0> Document.all
       Document Load (0.3ms)  SELECT "documents".* FROM "documents"
