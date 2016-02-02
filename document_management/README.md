@@ -753,6 +753,15 @@ The <i>to_s</i> method on an <i>ActiveRecord::Relation</i> instance returns the 
     irb(main):044:0> Document.where(name:"Doc1").to_sql
     => "SELECT \"documents\".* FROM \"documents\" WHERE \"documents\".\"name\" = 'Doc1'"
 
+<i>find_by methods</i>
+
+Active Record generates <i>find_by</i> methods based on the column names. They are short for the chaining of first method with where eg. <i>Document.where(name:"Doc1").first</i>
+
+    irb(main):049:0> Document.find_by_name("Doc2")
+      Document Load (0.1ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."name" = ? LIMIT 1  [["name", "Doc2"]]
+    => #<Document id: 4, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 03:24:39", updated_at: "2016-01-30 03:24:39">
+
+
 <i>Limiting Search Results</i>
 
 To limit the number of rows returned, call the <i>limit</i> method on the Model (Document) class. It returns an <i>ActiveRecord::Relation</i> instance.
@@ -783,8 +792,65 @@ Skipping more than existing number of rows, returns an empty <i>ActiveRecord::Re
     => #<ActiveRecord::Relation []>
 
 
+<b><i>Update</i></b>
+
+Updating a record is equivalent to 
+* reading a record into a variable
+* updating values and 
+* calling <i>save</i> method to save it back to the table
+
+
+    irb(main):050:0> Document.all
+      Document Load (0.5ms)  SELECT "documents".* FROM "documents"
+    => #<ActiveRecord::Relation [#<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">, #<Document id: 4, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 03:24:39", updated_at: "2016-01-30 03:24:39">]>
+    irb(main):051:0> doc = Document.find 3
+      Document Load (0.4ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 3]]
+    => #<Document id: 3, name: "doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-01-30 00:27:48">
+    irb(main):052:0> doc.name = "Doc3"
+    => "Doc3"
+    irb(main):053:0> doc.save
+       (0.2ms)  begin transaction
+      SQL (0.6ms)  UPDATE "documents" SET "name" = ?, "updated_at" = ? WHERE "documents"."id" = ?  [["name", "Doc3"], ["updated_at", "2016-02-02 00:47:20.647125"], ["id", 3]]
+       (102.7ms)  commit transaction
+    => true
+    irb(main):054:0> Document.find 3
+      Document Load (0.4ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 3]]
+    => #<Document id: 3, name: "Doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-02-02 00:47:20">
+
+Note: The <i>save</i> method returns true when the record is successfully saved.
+
+Updating a record can also be done by
+* reading a record into a variable
+* calling <i>update</i> method by passing it a hash of attribute-value pairs which updates the values and saves the updated record back to the table 
+
+
+    irb(main):055:0> Document.all
+      Document Load (0.3ms)  SELECT "documents".* FROM "documents"
+    => #<ActiveRecord::Relation [#<Document id: 3, name: "Doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-02-02 00:47:20">, #<Document id: 4, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 03:24:39", updated_at: "2016-01-30 03:24:39">]>
+    irb(main):056:0> doc = Document.find 3
+      Document Load (0.2ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 3]]
+    => #<Document id: 3, name: "Doc3", content: "This is document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-02-02 00:47:20">
+    irb(main):057:0> doc.update content: "This is Document3"
+       (0.1ms)  begin transaction
+      SQL (0.4ms)  UPDATE "documents" SET "content" = ?, "updated_at" = ? WHERE "documents"."id" = ?  [["content", "This is Document3"], ["updated_at", "2016-02-02 01:13:25.438584"], ["id", 3]]
+       (213.2ms)  commit transaction
+    => true
+    irb(main):058:0> Document.find 3
+      Document Load (0.1ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 3]]
+    => #<Document id: 3, name: "Doc3", content: "This is Document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-02-02 01:13:25">
+
+
 <b><i>Delete</i></b>
 
+    irb(main):046:0> Document.where(name: "Doc1").destroy_all
+      Document Load (0.1ms)  SELECT "documents".* FROM "documents" WHERE "documents"."name" = ?  [["name", "Doc1"]]
+       (0.1ms)  begin transaction
+      SQL (0.3ms)  DELETE FROM "documents" WHERE "documents"."id" = ?  [["id", 1]]
+       (108.6ms)  commit transaction
+       (0.2ms)  begin transaction
+      SQL (0.3ms)  DELETE FROM "documents" WHERE "documents"."id" = ?  [["id", 5]]
+       (87.2ms)  commit transaction
+    => [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">, #<Document id: 5, name: "Doc1", content: "Hello World!", created_at: "2016-02-02 00:05:27", updated_at: "2016-02-02 00:05:27">]
 
 
 <i>To exit the Rails console<i>
