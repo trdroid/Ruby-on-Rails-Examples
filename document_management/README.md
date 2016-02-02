@@ -726,6 +726,9 @@ Attempting to find by an id that does not exist results in an ActiveRecord::Reco
 
 To find a record by any other field, use the <i>where</i> method on the Document class. The where method returns an <i>ActiveRecord::Relation</i> instance which implies the possibility of more than one row being returned and that the methods of <i>ActiveRecord::Relation</i> can be chained with the <i>where</i> call. 
 
+    irb(main):034:0> Document.where(name:"Doc1").class.name
+    => "ActiveRecord::Relation"
+
 Chaining the first, last, and all methods with the <i>where</i> method respectively returns the first, last and all rows of the returned matching rows.
 
     irb(main):005:0> Document.where(name:"Doc1").first
@@ -737,6 +740,18 @@ Chaining the first, last, and all methods with the <i>where</i> method respectiv
     irb(main):007:0> Document.where(name:"Doc1").all
       Document Load (0.5ms)  SELECT "documents".* FROM "documents" WHERE "documents"."name" = ?  [["name", "Doc1"]]
     => #<ActiveRecord::Relation [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">]>
+
+
+The call <i>first</i> on an <i>ActiveRecord::Relation</i> instance returns the Model (Document) class's instance.
+
+    irb(main):033:0> Document.where(name:"Doc1").first.class.name
+      Document Load (0.4ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."name" = ?  ORDER BY "documents"."id" ASC LIMIT 1  [["name", "Doc1"]]
+    => "Document"
+
+The <i>to_s</i> method on an <i>ActiveRecord::Relation</i> instance returns the sql query in string
+
+    irb(main):044:0> Document.where(name:"Doc1").to_sql
+    => "SELECT \"documents\".* FROM \"documents\" WHERE \"documents\".\"name\" = 'Doc1'"
 
 <i>Limiting Search Results</i>
 
