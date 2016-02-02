@@ -608,7 +608,7 @@ Run the rollback task db:rollback to undo a database migration with a mistake in
        -> 0.0019s
     == 20160129144122 CreateDocuments: migrated (0.0021s) =========================
 
-Rails stores the current state of the database in the file db/schema.rb. This file is updated when a database migration is run and hence should not be edited manually. 
+Rails stores the current state of the database in the file db/schema.rb. This file is updated everytime a database migration is run and hence should not be edited manually. 
 
 > $ cat db/schema.rb
 
@@ -625,7 +625,7 @@ ActiveRecord::Schema.define(version: 20160129144122) do
 end
 ```
 
-To setup a new, empty database for an application, instead of running individual migrations, the rake task db:schema:load can be run.
+To setup a new, empty database for an application, or to remove all the data and reset the database structure, run the db:schema:load task, instead of running individual migrations.
 
 # Model
 
@@ -916,7 +916,7 @@ Using the <i>destroy</i> method on the Model (Document) class
       Document Load (0.2ms)  SELECT "documents".* FROM "documents"
     => #<ActiveRecord::Relation [#<Document id: 4, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 03:24:39", updated_at: "2016-01-30 03:24:39">]>
 
-Find the record and save the reference in a variable and call the <i>destroy</i> method on the variable
+Another way to destroy is to find the record and save the reference in a variable and call the <i>destroy</i> method on the variable
 
     irb(main):062:0> Document.all
       Document Load (0.3ms)  SELECT "documents".* FROM "documents"
@@ -950,15 +950,91 @@ The following shows the usage of <i>minimum</i>, <i>maximum</i> and <i>count</i>
        (1.0ms)  SELECT COUNT(*) FROM "documents"
     => 3
 
-<i>To exit the Rails console<i>
+<i>To exit the Rails console</i>
 
      irb(main):001:0\> exit
 
 <hr>
 
+### Adding a column to an existing table
 
+Add an column called "author" to the documents table.
 
+To do this, the <i>generate(g)</i> sub-command of the <i>rails</i> command can be used by passing it the name of the migration and its name and type as shown below.
 
+> $ bin/rails g migration add_author_to_documents author:string
 
+    Running via Spring preloader in process 25461
+      invoke  active_record
+      create    db/migrate/20160202170445_add_author_to_documents.rb
 
+> $ bin/rake db:migrate
 
+        Running via Spring preloader in process 25688
+        == 20160202170445 AddAuthorToDocuments: migrating =============================
+        -- add_column(:documents, :author, :string)
+           -> 0.0007s
+        == 20160202170445 AddAuthorToDocuments: migrated (0.0008s) ====================
+
+The migration follows the convention add_ColumnName_to_TableName (Remember! Convention over Configuration)
+
+Rails parses the migration name add_author_to_documents and knows to add a column name <i>author</i> to the table <i>documents</i> and its type is specified by <i>author:string</i> parameter.
+
+A custom migration name that does not follow the convention can also be used, except that it requires the migration to be edited manually. 
+
+Finally, the rake task has to be run to add the column to the table.
+
+The following file is created as a result
+
+$ cat db/20160202170445_add_author_to_documents.rb
+
+```ruby
+class AddAuthorToDocuments < ActiveRecord::Migration
+  def change
+    add_column :documents, :author, :string
+  end
+end
+```
+
+Adding another column "publisher", but this time let's not follow the convention:
+
+> $ bin/rails g migration addingWhoPublishedThisDocumentToDocuments pub:string
+
+    Running via Spring preloader in process 26111
+          invoke  active_record
+          create    db/migrate/20160202175612_adding_who_published_this_document_to_documents.rb
+
+> $ cat 20160202175612_adding_who_published_this_document_to_documents.rb
+
+```ruby
+class AddingWhoPublishedThisDocumentToDocuments < ActiveRecord::Migration
+  def change
+  end
+end
+```
+
+Before the migration task is run, the code to add a column to the table has to be added to the change method.
+
+```ruby
+class AddingWhoPublishedThisDocumentToDocuments < ActiveRecord::Migration
+  def change
+  	add_column :documents, :publisher, :string
+  end
+end
+```
+
+> $ bin/rake db:migrate
+
+    Running via Spring preloader in process 26282
+    == 20160202175612 AddingWhoPublishedThisDocumentToDocuments: migrating ========
+    -- add_column(:documents, :publisher, :string)
+       -> 0.0011s
+    == 20160202175612 AddingWhoPublishedThisDocumentToDocuments: migrated (0.0013s) 
+
+Check to see if the columns have been added:
+
+> $ bin/rails console
+
+    irb(main):001:0> Document.all
+      Document Load (1.7ms)  SELECT "documents".* FROM "documents"
+    => #<ActiveRecord::Relation [#<Document id: 6, name: "Doc1", content: "Hello World!", created_at: "2016-02-02 02:01:22", updated_at: "2016-02-02 02:01:22", author: nil, publisher: nil>, #<Document id: 7, name: "Doc2", content: "Hello World in Doc2!", created_at: "2016-02-02 02:01:33", updated_at: "2016-02-02 02:01:33", author: nil, publisher: nil>, #<Document id: 8, name: "Doc3", content: "Hello World in Doc3!", created_at: "2016-02-02 02:01:41", updated_at: "2016-02-02 02:01:41", author: nil, publisher: nil>]>
