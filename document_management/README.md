@@ -844,6 +844,8 @@ Updating a record using <i>update</i> method
 
 <b><i>Delete</i></b>
 
+Using the <i>destroy_all</i> method on an <i>ActiveRecord::Relation</i> instance
+
     irb(main):046:0> Document.where(name: "Doc1").destroy_all
       Document Load (0.1ms)  SELECT "documents".* FROM "documents" WHERE "documents"."name" = ?  [["name", "Doc1"]]
        (0.1ms)  begin transaction
@@ -853,6 +855,40 @@ Updating a record using <i>update</i> method
       SQL (0.3ms)  DELETE FROM "documents" WHERE "documents"."id" = ?  [["id", 5]]
        (87.2ms)  commit transaction
     => [#<Document id: 1, name: "Doc1", content: "Hello World!", created_at: "2016-01-30 00:04:22", updated_at: "2016-01-30 00:04:22">, #<Document id: 5, name: "Doc1", content: "Hello World!", created_at: "2016-02-02 00:05:27", updated_at: "2016-02-02 00:05:27">]
+
+Using the <i>destroy</i> method on the Model (Document) class
+
+    irb(main):059:0> Document.all
+      Document Load (0.5ms)  SELECT "documents".* FROM "documents"
+    => #<ActiveRecord::Relation [#<Document id: 3, name: "Doc3", content: "This is Document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-02-02 01:13:25">, #<Document id: 4, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 03:24:39", updated_at: "2016-01-30 03:24:39">]>
+    irb(main):060:0> Document.destroy 3
+      Document Load (0.1ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 3]]
+       (0.2ms)  begin transaction
+      SQL (0.2ms)  DELETE FROM "documents" WHERE "documents"."id" = ?  [["id", 3]]
+       (100.9ms)  commit transaction
+    => #<Document id: 3, name: "Doc3", content: "This is Document3", created_at: "2016-01-30 00:27:48", updated_at: "2016-02-02 01:13:25">
+    irb(main):061:0> Document.all
+      Document Load (0.2ms)  SELECT "documents".* FROM "documents"
+    => #<ActiveRecord::Relation [#<Document id: 4, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 03:24:39", updated_at: "2016-01-30 03:24:39">]>
+
+Find the record and save the reference in a variable and call the <i>destroy</i> method on the variable
+
+    irb(main):062:0> Document.all
+      Document Load (0.3ms)  SELECT "documents".* FROM "documents"
+    => #<ActiveRecord::Relation [#<Document id: 4, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 03:24:39", updated_at: "2016-01-30 03:24:39">]>
+    irb(main):063:0> doc = Document.find 4
+      Document Load (0.2ms)  SELECT  "documents".* FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 4]]
+    => #<Document id: 4, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 03:24:39", updated_at: "2016-01-30 03:24:39">
+    irb(main):064:0> doc.destroy
+       (0.1ms)  begin transaction
+      SQL (0.2ms)  DELETE FROM "documents" WHERE "documents"."id" = ?  [["id", 4]]
+       (96.6ms)  commit transaction
+    => #<Document id: 4, name: "Doc2", content: "This is document2!", created_at: "2016-01-30 03:24:39", updated_at: "2016-01-30 03:24:39">
+    irb(main):065:0> Document.all
+      Document Load (0.5ms)  SELECT "documents".* FROM "documents"
+    => #<ActiveRecord::Relation []>
+
+
 
 
 <i>To exit the Rails console<i>
