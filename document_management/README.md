@@ -956,9 +956,9 @@ The following shows the usage of <i>minimum</i>, <i>maximum</i> and <i>count</i>
 
 <hr>
 
-### Adding a column to an existing table
+### Adding columns to an existing table
 
-Add an column called "author" to the documents table.
+Add a column called "author" to the documents table.
 
 To do this, the <i>generate(g)</i> sub-command of the <i>rails</i> command can be used by passing it the name of the migration and its name and type as shown below.
 
@@ -1063,4 +1063,154 @@ Check to see if the columns have been added:
     => #<ActiveRecord::Relation [#<Document id: 6, name: "Doc1", content: "Hello World!", created_at: "2016-02-02 02:01:22", updated_at: "2016-02-02 02:01:22", author: nil, publisher: nil>, #<Document id: 7, name: "Doc2", content: "Hello World in Doc2!", created_at: "2016-02-02 02:01:33", updated_at: "2016-02-02 02:01:33", author: nil, publisher: nil>, #<Document id: 8, name: "Doc3", content: "Hello World in Doc3!", created_at: "2016-02-02 02:01:41", updated_at: "2016-02-02 02:01:41", author: nil, publisher: nil>]>
 
 <hr>
+
+# Routes
+
+Rails applications are RESTful by default.
+
+RESTful resources correspond to models in Rails.
+
+The application's routes are stored in <i>config/routes.rb</i>
+
+$ cat config/routes.rb
+
+```ruby
+Rails.application.routes.draw do
+  resources :documents
+end
+```
+This application only has one resource <i>documents</i>.
+
+<i>resources :documents</i> generates a set of routes for the application.
+
+<i>List the set of routes in an application</i>
+
+> $ bin/rake routes
+
+    Running via Spring preloader in process 7863
+           Prefix Verb   URI Pattern                   Controller#Action
+        documents GET    /documents(.:format)          documents#index
+                  POST   /documents(.:format)          documents#create
+     new_document GET    /documents/new(.:format)      documents#new
+    edit_document GET    /documents/:id/edit(.:format) documents#edit
+         document GET    /documents/:id(.:format)      documents#show
+                  PATCH  /documents/:id(.:format)      documents#update
+                  PUT    /documents/:id(.:format)      documents#update
+                  DELETE /documents/:id(.:format)      documents#destroy
+
+
+The command displays 
+* the route helper prefix
+* HTTP verb
+* URI pattern
+* Controller actions for each of the seven default RESTful actions
+
+The controllers can be found in <i>app/controllers</i> directory. 
+
+Controller actions are defined as methods in the controller class. 
+
+> $ cat app/controllers/documents_controller.rb
+
+```ruby
+class DocumentsController < ApplicationController
+  before_action :set_document, only: [:show, :edit, :update, :destroy]
+
+  # GET /documents
+  # GET /documents.json
+  def index
+    @documents = Document.all
+  end
+
+  # GET /documents/1
+  # GET /documents/1.json
+  def show
+  end
+
+  # GET /documents/new
+  def new
+    @document = Document.new
+  end
+
+  # GET /documents/1/edit
+  def edit
+  end
+
+  # POST /documents
+  # POST /documents.json
+  def create
+    @document = Document.new(document_params)
+
+    respond_to do |format|
+      if @document.save
+        format.html { redirect_to @document, notice: 'Document was successfully created.' }
+        format.json { render :show, status: :created, location: @document }
+      else
+        format.html { render :new }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /documents/1
+  # PATCH/PUT /documents/1.json
+  def update
+    respond_to do |format|
+      if @document.update(document_params)
+        format.html { redirect_to @document, notice: 'Document was successfully updated.' }
+        format.json { render :show, status: :ok, location: @document }
+      else
+        format.html { render :edit }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /documents/1
+  # DELETE /documents/1.json
+  def destroy
+    @document.destroy
+    respond_to do |format|
+      format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_document
+      @document = Document.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def document_params
+      params.require(:document).permit(:name, :content)
+    end
+end
+```
+
+<b><i>Defining Custom Routes</i></b>
+
+Custom routes can be configured in Rails, 
+* if actions other than the default actions are needed in the application
+* if custom names have to be provided for default actions
+* mapping old URLs to a new Rails application
+* simplifying URLs for complex actions
+
+Consider a resource "session" that provides custom route names for default actions
+
+GET signin for executing the "new" method in the session controller, which should return a form for the users to signin
+
+POST signin for session#destroy
+
+
+```ruby
+Rails.application.routes.draw do
+  resources :documents
+
+  get 'signin' => 'session#new'
+  post 'signin' => 'session#create'
+  delete 'signin' => 'session#destroy'
+end
+```
+
 
