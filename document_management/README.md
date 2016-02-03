@@ -1105,6 +1105,13 @@ The command displays
 * URI pattern
 * Controller actions for each of the seven default RESTful actions
 
+
+GET \<domain-name\>/documents executes the "index" method defined in the documents controller
+
+POST \<domain-name\>/documents executes the "create" method defined in the documents controller
+
+<i>NOTE: Accessing a path the DOES NOT have a corresponding controller action results in an error.</i>
+
 The controllers can be found in <i>app/controllers</i> directory. 
 
 Controller actions are defined as methods in the controller class. 
@@ -1198,10 +1205,13 @@ Custom routes can be configured in Rails,
 
 Consider a resource "session" that provides custom route names for default actions
 
-GET signin for executing the "new" method in the session controller, which should return a form for the users to signin
+GET signin for executing the "new" method in the session controller, which returns a form for the users to signin
 
-POST signin for session#destroy
+POST signin for executing the "create" method in the session controller, which gets called when the user posts their credentials and which creates a new session in response to the request.
 
+DELETE signin for executing the "destroy" method in the session controller, which gets called when the user performs a signout action. 
+
+Do the following changes to <i>config/routes.rb</i>
 
 ```ruby
 Rails.application.routes.draw do
@@ -1213,4 +1223,107 @@ Rails.application.routes.draw do
 end
 ```
 
+The newly added routes would show up in the list of routes of the application
+
+> $ bin/rake routes
+
+    Running via Spring preloader in process 8998
+           Prefix Verb   URI Pattern                   Controller#Action
+        documents GET    /documents(.:format)          documents#index
+                  POST   /documents(.:format)          documents#create
+     new_document GET    /documents/new(.:format)      documents#new
+    edit_document GET    /documents/:id/edit(.:format) documents#edit
+         document GET    /documents/:id(.:format)      documents#show
+                  PATCH  /documents/:id(.:format)      documents#update
+                  PUT    /documents/:id(.:format)      documents#update
+                  DELETE /documents/:id(.:format)      documents#destroy
+           signin GET    /signin(.:format)             session#new
+                  POST   /signin(.:format)             session#create
+                  DELETE /signin(.:format)             session#destroy
+
+<b>The Root Route</b>
+
+The root route sets the application's home page. It can be set by adding <i>root    'documents#index'</i> to the application i.e. by adding it to <i>config/routes.rb</i>
+
+```ruby
+Rails.application.routes.draw do
+  resources :documents
+
+  get 'signin' => 'session#new'
+  post 'signin' => 'session#create'
+  delete 'signin' => 'session#destroy'
+
+  root 'documents#index'
+end
+```
+Look at the list of routes now:
+
+> $ bin/rake routes
+
+    Running via Spring preloader in process 11695
+           Prefix Verb   URI Pattern                   Controller#Action
+        documents GET    /documents(.:format)          documents#index
+                  POST   /documents(.:format)          documents#create
+     new_document GET    /documents/new(.:format)      documents#new
+    edit_document GET    /documents/:id/edit(.:format) documents#edit
+         document GET    /documents/:id(.:format)      documents#show
+                  PATCH  /documents/:id(.:format)      documents#update
+                  PUT    /documents/:id(.:format)      documents#update
+                  DELETE /documents/:id(.:format)      documents#destroy
+           signin GET    /signin(.:format)             session#new
+                  POST   /signin(.:format)             session#create
+                  DELETE /signin(.:format)             session#destroy
+             root GET    /                             documents#index
+
+
+<b>Nested Resources</b>
+
+"documents" is a resource (as models in Rails are RESTful resources).
+
+"feedback" could be considered another resource that only belongs to "documents"
+
+A nested resource is a resource that belongs to another resource. It can be added by specifying "resource :name_of_nested_resource" in a do-end block of the main resources declaration.
+
+<i>config/routes.rb</i>
+
+```ruby
+Rails.application.routes.draw do
+  resources :documents do
+    resources :feedback
+  end
+
+  get 'signin' => 'session#new'
+  post 'signin' => 'session#create'
+  delete 'signin' => 'session#destroy'
+
+  root 'documents#index'
+end
+```
+
+Look at the list of routes now:
+
+> $ bin/rake routes
+
+    Running via Spring preloader in process 11773
+                     Prefix Verb   URI Pattern                                         Controller#Action
+    document_feedback_index GET    /documents/:document_id/feedback(.:format)          feedback#index
+                            POST   /documents/:document_id/feedback(.:format)          feedback#create
+      new_document_feedback GET    /documents/:document_id/feedback/new(.:format)      feedback#new
+     edit_document_feedback GET    /documents/:document_id/feedback/:id/edit(.:format) feedback#edit
+          document_feedback GET    /documents/:document_id/feedback/:id(.:format)      feedback#show
+                            PATCH  /documents/:document_id/feedback/:id(.:format)      feedback#update
+                            PUT    /documents/:document_id/feedback/:id(.:format)      feedback#update
+                            DELETE /documents/:document_id/feedback/:id(.:format)      feedback#destroy
+                  documents GET    /documents(.:format)                                documents#index
+                            POST   /documents(.:format)                                documents#create
+               new_document GET    /documents/new(.:format)                            documents#new
+              edit_document GET    /documents/:id/edit(.:format)                       documents#edit
+                   document GET    /documents/:id(.:format)                            documents#show
+                            PATCH  /documents/:id(.:format)                            documents#update
+                            PUT    /documents/:id(.:format)                            documents#update
+                            DELETE /documents/:id(.:format)                            documents#destroy
+                     signin GET    /signin(.:format)                                   session#new
+                            POST   /signin(.:format)                                   session#create
+                            DELETE /signin(.:format)                                   session#destroy
+                       root GET    /                                                   documents#index
 
