@@ -91,7 +91,7 @@ The bundle command reads and installs the gems listed in the <i>Gemfile</i> stor
 
 It stores the version numbers of gems and their dependencies used in an application in the file Gemfile.lock
 
-<i>Installing gems and their dependencies<i>
+<i>Installing gems and their dependencies</i>
 
 The <i>rails new</i> command runs the following bundle command to install the gems and their dependencies when creating an application.
 
