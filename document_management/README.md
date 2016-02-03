@@ -1079,7 +1079,7 @@ Rails.application.routes.draw do
   resources :documents
 end
 ```
-This application only has one resource <i>documents</i>.
+This application only has one resource: <i>documents</i>.
 
 <i>resources :documents</i> generates a set of routes for the application.
 
@@ -1326,4 +1326,44 @@ Look at the list of routes now:
                             POST   /signin(.:format)                                   session#create
                             DELETE /signin(.:format)                                   session#destroy
                        root GET    /                                                   documents#index
+
+As it can seen from the output that all the seven default actions are generated for the nested resource. If, however, only certain actions needs to be generated, it could be specified along with the declaration of the nested resource.
+
+Say, if only create and destroy actions have to be generated for the nested resource feedback, the following changes have to be done
+
+<i>config/routes.rb</i>
+
+```ruby
+Rails.application.routes.draw do
+  resources :documents do
+    resources :feedback, only: [:create, :destroy]
+  end
+
+  get 'signin' => 'session#new'
+  post 'signin' => 'session#create'
+  delete 'signin' => 'session#destroy'
+
+  root 'documents#index'
+end
+```
+Look at the list of routes now:
+
+> $ bin/rake routes
+
+    Running via Spring preloader in process 12061
+                     Prefix Verb   URI Pattern                                    Controller#Action
+    document_feedback_index POST   /documents/:document_id/feedback(.:format)     feedback#create
+          document_feedback DELETE /documents/:document_id/feedback/:id(.:format) feedback#destroy
+                  documents GET    /documents(.:format)                           documents#index
+                            POST   /documents(.:format)                           documents#create
+               new_document GET    /documents/new(.:format)                       documents#new
+              edit_document GET    /documents/:id/edit(.:format)                  documents#edit
+                   document GET    /documents/:id(.:format)                       documents#show
+                            PATCH  /documents/:id(.:format)                       documents#update
+                            PUT    /documents/:id(.:format)                       documents#update
+                            DELETE /documents/:id(.:format)                       documents#destroy
+                     signin GET    /signin(.:format)                              session#new
+                            POST   /signin(.:format)                              session#create
+                            DELETE /signin(.:format)                              session#destroy
+                       root GET    /                                              documents#index
 
