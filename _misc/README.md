@@ -103,14 +103,26 @@ The <i>rails new</i> command runs the following bundle command to install the ge
 
 <hr>
 
+# Models
+
+Resources in REST correspond to models in Rails. 
+
+REST maps HTTP verbs with the CRUD operations of the database to deal with the resources
+
+| HTTP Verb     | Database Action   |
+| --------|---------|
+|   GET |  read  |
+|  POST |  create |
+|  PATCH |  update |
+|  DELETE |  delete |
+
 # Controllers
 
-The client interact with the controllers through a collection of URLs and HTTP verbs.
-
-The controllers in Rails connect an application's models with its views. It processes requests and returns response to the clients.  
+Clients interact with a Rails application through a collection of URLs and HTTP verbs. 
 
 Any web requests received by a Rails application is routed to an appropriate controller which determines how to handle a request based on the HTTP verb. 
 
+The controllers in Rails connect an application's models with its views. It processes requests and returns response to the clients.  
+
 Generally, the controllers interact with models and get data from them to render an appropriate view or just redirect to another location.
 
-Resources in REST correspond to models in Rails. 
