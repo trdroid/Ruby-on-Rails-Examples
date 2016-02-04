@@ -1367,3 +1367,40 @@ Look at the list of routes now:
                             DELETE /signin(.:format)                              session#destroy
                        root GET    /                                              documents#index
 
+<b>Path and URL Helpers</b>
+
+Adding a route automatically creates both Path and URL helpers for the controllers and views. 
+
+The Path Helpers include only the Path, whereas the URL helpers include the Protocol, Server, Port and the Path.
+
+Using Helpers in a Rails application in place of hard coding URLs is a better approach. Any changes to the URLs at a later point in time does not require you to search the entire application for old URLs and replace them with the new ones. 
+
+Helpers can be checked in the Rails console:
+
+URL Helpers
+
+    irb(main):010:0> app.documents_url
+    => "http://www.example.com/documents"
+    irb(main):011:0> app.new_document_url
+    => "http://www.example.com/documents/new"
+    irb(main):012:0> app.edit_document_url(5)
+    => "http://www.example.com/documents/5/edit"
+    irb(main):013:0> app.document_url(5)
+    => "http://www.example.com/documents/5"
+
+Path Helpers
+
+    irb(main):014:0> app.documents_path
+    => "/documents"
+    irb(main):015:0> app.new_document_path
+    => "/documents/new"
+    irb(main):016:0> app.edit_document_path(5)
+    => "/documents/5/edit"
+    irb(main):017:0> app.document_path(5)
+    => "/documents/5"
+
+Root path
+
+    irb(main):019:0> app.root_path
+    => "/"
+
