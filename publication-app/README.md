@@ -6,6 +6,19 @@
 
 >    sudo apt-get install postgresql postgresql-contrib libpq-dev python-dev
 
+Installation of postgres creates a "postgres" user by default
+
+> sudo su - postgres
+
+```
+[sudo] password for droid: 
+postgres@droidserver:~$ psql
+psql (9.5.2)
+Type "help" for help.
+
+postgres=# 
+```
+
 **Creating the application**
 
 > onBB/Ruby-on-Rails$ rails new publication-app --database=postgresql
@@ -172,4 +185,114 @@ Depending on your version of ruby, you may need to install ruby rdoc/ri data:
 **Expanded Application Structure**
 
 ![](_misc/expanded%20application%20structure.png)
+
+
+### Create the Database
+
+> publication-app$ rake db:create
+
+```
+FATAL:  role "droid" does not exist
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/postgresql_adapter.rb:665:in `rescue in connect'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/postgresql_adapter.rb:655:in `connect'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/postgresql_adapter.rb:242:in `initialize'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `new'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `postgresql_connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
+/usr/local/lib/ruby/2.2.0/monitor.rb:211:in `mon_synchronize'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
+/usr/local/lib/ruby/2.2.0/monitor.rb:211:in `mon_synchronize'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:571:in `retrieve_connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_handling.rb:113:in `retrieve_connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_handling.rb:87:in `connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/postgresql_database_tasks.rb:8:in `connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/postgresql_database_tasks.rb:17:in `create'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/database_tasks.rb:93:in `create'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/database_tasks.rb:107:in `block in create_current'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/database_tasks.rb:275:in `block in each_current_configuration'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/database_tasks.rb:274:in `each'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/database_tasks.rb:274:in `each_current_configuration'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/database_tasks.rb:106:in `create_current'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/railties/databases.rake:17:in `block (2 levels) in <top (required)>'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:248:in `call'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:248:in `block in execute'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:243:in `each'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:243:in `execute'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:187:in `block in invoke_with_call_chain'
+/usr/local/lib/ruby/2.2.0/monitor.rb:211:in `mon_synchronize'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:180:in `invoke_with_call_chain'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:173:in `invoke'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:150:in `invoke_task'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:106:in `block (2 levels) in top_level'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:106:in `each'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:106:in `block in top_level'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:115:in `run_with_threads'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:100:in `top_level'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:78:in `block in run'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:176:in `standard_exception_handling'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:75:in `run'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/bin/rake:33:in `<top (required)>'
+/usr/local/bin/rake:23:in `load'
+/usr/local/bin/rake:23:in `<main>'
+Couldn't create database for {"adapter"=>"postgresql", "encoding"=>"unicode", "pool"=>5, "database"=>"publication-app_development"}
+FATAL:  role "droid" does not exist
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/postgresql_adapter.rb:665:in `rescue in connect'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/postgresql_adapter.rb:655:in `connect'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/postgresql_adapter.rb:242:in `initialize'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `new'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `postgresql_connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
+/usr/local/lib/ruby/2.2.0/monitor.rb:211:in `mon_synchronize'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
+/usr/local/lib/ruby/2.2.0/monitor.rb:211:in `mon_synchronize'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/connection_pool.rb:571:in `retrieve_connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_handling.rb:113:in `retrieve_connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/connection_handling.rb:87:in `connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/postgresql_database_tasks.rb:8:in `connection'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/postgresql_database_tasks.rb:17:in `create'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/database_tasks.rb:93:in `create'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/database_tasks.rb:107:in `block in create_current'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/database_tasks.rb:275:in `block in each_current_configuration'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/database_tasks.rb:274:in `each'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/database_tasks.rb:274:in `each_current_configuration'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/tasks/database_tasks.rb:106:in `create_current'
+/usr/local/lib/ruby/gems/2.2.0/gems/activerecord-4.2.4/lib/active_record/railties/databases.rake:17:in `block (2 levels) in <top (required)>'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:248:in `call'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:248:in `block in execute'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:243:in `each'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:243:in `execute'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:187:in `block in invoke_with_call_chain'
+/usr/local/lib/ruby/2.2.0/monitor.rb:211:in `mon_synchronize'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:180:in `invoke_with_call_chain'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/task.rb:173:in `invoke'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:150:in `invoke_task'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:106:in `block (2 levels) in top_level'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:106:in `each'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:106:in `block in top_level'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:115:in `run_with_threads'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:100:in `top_level'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:78:in `block in run'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:176:in `standard_exception_handling'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/lib/rake/application.rb:75:in `run'
+/usr/local/lib/ruby/gems/2.2.0/gems/rake-11.1.2/bin/rake:33:in `<top (required)>'
+/usr/local/bin/rake:23:in `load'
+/usr/local/bin/rake:23:in `<main>'
+Couldn't create database for {"adapter"=>"postgresql", "encoding"=>"unicode", "pool"=>5, "database"=>"publication-app_test"}
+```
+
+> publication-app$ psql
+
+```
+psql: FATAL:  role "droid" does not exist
+```
 
