@@ -1347,5 +1347,6 @@ Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bd
 
 *snapshot*
 
-![]()
+![](_misc/browser%20snapshot.png)
+
 
