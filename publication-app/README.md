@@ -1485,7 +1485,7 @@ Request for /users/sign_up from the browser
 
 Snapshot
 
-![]()
+![](_misc/users%20sign_up%20in%20browser.png)
 
 ```
 Started GET "/users/sign_up" for 127.0.0.1 at 2016-04-07 10:16:05 -0400
@@ -1495,3 +1495,13 @@ Processing by Devise::RegistrationsController#new as HTML
 Completed 200 OK in 26ms (Views: 24.7ms | ActiveRecord: 0.0ms)
 ```
 
+*Signing up*
+
+Sign up with the email 'sample@gmail.com'. After signup, the browser is redirected to the "root" (as configured in *publication-app/config/routes.rb*), which displays the view that results from calling the HomeController's index method.
+
+Snapshot after signing up
+
+![]()
+
+
+![]()
