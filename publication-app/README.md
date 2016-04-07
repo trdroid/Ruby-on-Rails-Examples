@@ -405,6 +405,157 @@ BUNDLED WITH
    1.10.6
 ```
 
+> publication-app$ bin/bundle list
+
+```
+Gems included by the bundle:
+  * actionmailer (4.2.4)
+  * actionpack (4.2.4)
+  * actionview (4.2.4)
+  * activejob (4.2.4)
+  * activemodel (4.2.4)
+  * activerecord (4.2.4)
+  * activesupport (4.2.4)
+  * arel (6.0.3)
+  * binding_of_caller (0.7.2)
+  * builder (3.2.2)
+  * bundler (1.10.6)
+  * byebug (8.2.2)
+  * coffee-rails (4.1.1)
+  * coffee-script (2.4.1)
+  * coffee-script-source (1.10.0)
+  * concurrent-ruby (1.0.1)
+  * debug_inspector (0.0.2)
+  * erubis (2.7.0)
+  * execjs (2.6.0)
+  * globalid (0.3.6)
+  * i18n (0.7.0)
+  * jbuilder (2.4.1)
+  * jquery-rails (4.1.1)
+  * json (1.8.3)
+  * loofah (2.0.3)
+  * mail (2.6.4)
+  * mime-types (3.0)
+  * mime-types-data (3.2016.0221)
+  * mini_portile2 (2.0.0)
+  * minitest (5.8.4)
+  * multi_json (1.11.2)
+  * nokogiri (1.6.7.2)
+  * pg (0.18.4)
+  * rack (1.6.4)
+  * rack-test (0.6.3)
+  * rails (4.2.4)
+  * rails-deprecated_sanitizer (1.0.3)
+  * rails-dom-testing (1.0.7)
+  * rails-html-sanitizer (1.0.3)
+  * railties (4.2.4)
+  * rake (11.1.2)
+  * rdoc (4.2.2)
+  * sass (3.4.22)
+  * sass-rails (5.0.4)
+  * sdoc (0.4.1)
+  * spring (1.6.4)
+  * sprockets (3.5.2)
+  * sprockets-rails (3.0.4)
+  * thor (0.19.1)
+  * thread_safe (0.3.5)
+  * tilt (2.0.2)
+  * turbolinks (2.5.3)
+  * tzinfo (1.2.2)
+  * uglifier (3.0.0)
+  * web-console (2.3.0)
+```
+
+*publication-app/config/database.yml*
+
+```yml
+# PostgreSQL. Versions 8.2 and up are supported.
+#
+# Install the pg driver:
+#   gem install pg
+# On OS X with Homebrew:
+#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+# On OS X with MacPorts:
+#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
+# On Windows:
+#   gem install pg
+#       Choose the win32 build.
+#       Install PostgreSQL and put its /bin directory on your path.
+#
+# Configure Using Gemfile
+# gem 'pg'
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+
+development:
+  <<: *default
+  database: publication-app_development
+
+  # The specified database role being used to connect to postgres.
+  # To create additional roles in postgres see `$ createuser --help`.
+  # When left blank, postgres will use the default role. This is
+  # the same name as the operating system user that initialized the database.
+  #username: publication-app
+
+  # The password associated with the postgres role (username).
+  #password:
+
+  # Connect on a TCP socket. Omitted by default since the client uses a
+  # domain socket that doesn't need configuration. Windows does not have
+  # domain sockets, so uncomment these lines.
+  #host: localhost
+
+  # The TCP port the server listens on. Defaults to 5432.
+  # If your server runs on a different port number, change accordingly.
+  #port: 5432
+
+  # Schema search path. The server defaults to $user,public
+  #schema_search_path: myapp,sharedapp,public
+
+  # Minimum log levels, in increasing order:
+  #   debug5, debug4, debug3, debug2, debug1,
+  #   log, notice, warning, error, fatal, and panic
+  # Defaults to warning.
+  #min_messages: notice
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: publication-app_test
+
+# As with config/secrets.yml, you never want to store sensitive information,
+# like your database password, in your source code. If your source code is
+# ever seen by anyone, they now have access to your database.
+#
+# Instead, provide the password as a unix environment variable when you boot
+# the app. Read http://guides.rubyonrails.org/configuring.html#configuring-a-database
+# for a full rundown on how to provide these environment variables in a
+# production deployment.
+#
+# On Heroku and other platform providers, you may have a full connection URL
+# available as an environment variable. For example:
+#
+#   DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
+#
+# You can use this database configuration with:
+#
+#   production:
+#     url: <%= ENV['DATABASE_URL'] %>
+#
+production:
+  <<: *default
+  database: publication-app_production
+  username: publication-app
+  password: <%= ENV['PUBLICATION-APP_DATABASE_PASSWORD'] %>
+```
+
 ### Create the Database
 
 > publication-app$ rake db:create
@@ -538,4 +689,5 @@ LINE 1: CREATE ROLE publication-app-admin WITH CREATEDB LOGIN PASSWO...
 postgres=# CREATE ROLE publication_app_admin WITH CREATEDB LOGIN PASSWORD 'password';
 CREATE ROLE
 ```
+
 
