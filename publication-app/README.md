@@ -1350,3 +1350,132 @@ Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bd
 ![](_misc/browser%20snapshot.png)
 
 
+Step 3)
+
+Add flash messages to let the user know of a successful/unsuccessful signin messages.
+
+*publication-app/app/views/layouts/application.html.erb*
+
+```erb
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PublicationApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+       <p class="notice"><%= notice %></p>   ---------
+       <p class="alert"><%= alert %></p>
+<%= yield %>
+
+</body>
+</html>
+```
+
+Step 5)
+
+To customize devise provided views, copy the views first by 
+
+> publication-app$ rails g devise:views
+
+**Create a model and configure it with default Devise Modules**
+
+> publication-app$ rails generate devise User
+
+```
+Running via Spring preloader in process 11058
+      invoke  active_record
+      create    db/migrate/20160407134119_devise_create_users.rb   
+      create    app/models/user.rb
+      invoke    test_unit
+      create      test/models/user_test.rb
+      create      test/fixtures/users.yml
+      insert    app/models/user.rb
+       route  devise_for :users
+```
+
+ 'db/migrate/20160407134119_devise_create_users.rb' is a database migration file, which creates a table in the database.
+ 
+ 'app/models/user.rb' is the User module definition.
+ 
+ 'devise_for :users' is the routing section for Users in the routes file.
+ 
+ **Add User to the database**
+ 
+ > publication-app$ rake db:migrate
+ 
+ ```
+ == 20160407134119 DeviseCreateUsers: migrating ================================
+-- create_table(:users)
+   -> 0.2249s
+-- add_index(:users, :email, {:unique=>true})
+   -> 0.0336s
+-- add_index(:users, :reset_password_token, {:unique=>true})
+   -> 0.0340s
+== 20160407134119 DeviseCreateUsers: migrated (0.2929s) =======================
+ ```
+ 
+ Look into the database to see the results of running the above steps
+ 
+ ```
+ droid@droidserver:~/onBB/Ruby-on-Rails-Sample-Apps/publication-app$ sudo su postgres
+[sudo] password for droid: 
+postgres@droidserver:/home/droid/onBB/Ruby-on-Rails-Sample-Apps/publication-app$ psql
+could not change directory to "/home/droid/onBB/Ruby-on-Rails-Sample-Apps/publication-app": Permission denied
+psql (9.5.2)
+Type "help" for help.
+postgres-# \connect publication-app_development
+You are now connected to database "publication-app_development" as user "postgres".
+publication-app_development-# \dt
+                  List of relations
+ Schema |       Name        | Type  |      Owner      
+--------+-------------------+-------+-----------------
+ public | schema_migrations | table | publication-app
+ public | users             | table | publication-app
+(2 rows)
+```
+
+Start the server
+
+> publication-app$ rails server
+
+```
+=> Booting WEBrick
+=> Rails 4.2.4 application starting in development on http://localhost:3000
+=> Run `rails server -h` for more startup options
+=> Ctrl-C to shutdown server
+[2016-04-07 10:04:41] INFO  WEBrick 1.3.1
+[2016-04-07 10:04:41] INFO  ruby 2.2.3 (2015-08-18) [x86_64-linux]
+[2016-04-07 10:04:41] INFO  WEBrick::HTTPServer#start: pid=11430 port=3000
+```
+
+Snapshot
+
+![]()
+
+```
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-04-07 10:04:46 -0400
+  ActiveRecord::SchemaMigration Load (0.4ms)  SELECT "schema_migrations".* FROM "schema_migrations"
+Processing by Devise::SessionsController#new as HTML
+  Rendered /usr/local/lib/ruby/gems/2.2.0/gems/devise-3.5.6/app/views/devise/shared/_links.html.erb (3.9ms)
+  Rendered /usr/local/lib/ruby/gems/2.2.0/gems/devise-3.5.6/app/views/devise/sessions/new.html.erb within layouts/application (55.6ms)
+Completed 200 OK in 312ms (Views: 285.1ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-04-07 10:04:46 -0400
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-04-07 10:04:46 -0400
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-04-07 10:04:46 -0400
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-04-07 10:04:46 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2016-04-07 10:04:46 -0400
+```
+
