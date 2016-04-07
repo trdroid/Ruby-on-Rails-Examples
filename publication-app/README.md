@@ -1568,7 +1568,7 @@ Including a partial
 
 Run the server and check in the browser
 
-![]()
+![](_misc/navbar%20error%20in%20browser.png)
 
 It could be noticed from the error that he partial is being looked for at home/_navbar and application/_navbar (Notice, the partial navbar is referred to as _navbar as all partials are prepended with an _) 
 
