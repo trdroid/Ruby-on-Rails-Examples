@@ -1288,3 +1288,64 @@ Rails.application.routes.draw do
 end
 ```
 
+**Create the controller and the view**
+
+*publication-app/app/controllers/home_controller.rb*
+
+```ruby
+class HomeController < ApplicationController
+	def index
+	end
+end
+```
+
+Create a folder 'home' in *publication-app/app/views* and a new file in it called 'index.html.erb'
+
+*publication-app/app/views/home/index.html.erb*
+
+```erb
+<h1>Welcome to the index page</h1>
+```
+
+*Start server*
+
+> publication-app$ rails server
+
+```
+=> Booting WEBrick
+=> Rails 4.2.4 application starting in development on http://localhost:3000
+=> Run `rails server -h` for more startup options
+=> Ctrl-C to shutdown server
+[2016-04-07 09:18:34] INFO  WEBrick 1.3.1
+[2016-04-07 09:18:34] INFO  ruby 2.2.3 (2015-08-18) [x86_64-linux]
+[2016-04-07 09:18:34] INFO  WEBrick::HTTPServer#start: pid=10568 port=3000
+```
+
+Make a request from the browser. The following is displayed on the console
+
+```
+Started GET "/" for 127.0.0.1 at 2016-04-07 09:18:35 -0400
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 1945ms (Views: 1928.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2016-04-07 09:18:37 -0400
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-04-07 09:18:37 -0400
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-04-07 09:18:37 -0400
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-04-07 09:18:37 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2016-04-07 09:18:37 -0400
+```
+
+*snapshot*
+
+![]()
+
