@@ -1451,6 +1451,8 @@ Start the server
 [2016-04-07 10:04:41] INFO  WEBrick::HTTPServer#start: pid=11430 port=3000
 ```
 
+Request for /users/sign_in from the browser
+
 Snapshot
 
 ![](_misc/users%20sign_in%20in%20browser.png)
@@ -1477,5 +1479,19 @@ Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8b
 
 
 Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2016-04-07 10:04:46 -0400
+```
+
+Request for /users/sign_up from the browser
+
+Snapshot
+
+![]()
+
+```
+Started GET "/users/sign_up" for 127.0.0.1 at 2016-04-07 10:16:05 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered /usr/local/lib/ruby/gems/2.2.0/gems/devise-3.5.6/app/views/devise/shared/_links.html.erb (0.4ms)
+  Rendered /usr/local/lib/ruby/gems/2.2.0/gems/devise-3.5.6/app/views/devise/registrations/new.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 26ms (Views: 24.7ms | ActiveRecord: 0.0ms)
 ```
 
