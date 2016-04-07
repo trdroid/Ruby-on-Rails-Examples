@@ -177,6 +177,7 @@ The Gemfile is also created by the <i>rails new</i> command
 
 >   $ cat Gemfile
 
+```ruby
     source 'https://rubygems.org'
 
 
@@ -223,7 +224,7 @@ The Gemfile is also created by the <i>rails new</i> command
       # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
       gem 'spring'
     end
-
+```
 
 <hr>
 
