@@ -1435,6 +1435,28 @@ publication-app_development-# \dt
  public | schema_migrations | table | publication-app
  public | users             | table | publication-app
 (2 rows)
+
+publication-app_development-# \d+ users
+                                                               Table "public.users"
+         Column         |            Type             |                     Modifiers                      | Storage  | Stats target | Description 
+------------------------+-----------------------------+----------------------------------------------------+----------+--------------+-------------
+ id                     | integer                     | not null default nextval('users_id_seq'::regclass) | plain    |              | 
+ email                  | character varying           | not null default ''::character varying             | extended |              | 
+ encrypted_password     | character varying           | not null default ''::character varying             | extended |              | 
+ reset_password_token   | character varying           |                                                    | extended |              | 
+ reset_password_sent_at | timestamp without time zone |                                                    | plain    |              | 
+ remember_created_at    | timestamp without time zone |                                                    | plain    |              | 
+ sign_in_count          | integer                     | not null default 0                                 | plain    |              | 
+ current_sign_in_at     | timestamp without time zone |                                                    | plain    |              | 
+ last_sign_in_at        | timestamp without time zone |                                                    | plain    |              | 
+ current_sign_in_ip     | inet                        |                                                    | main     |              | 
+ last_sign_in_ip        | inet                        |                                                    | main     |              | 
+ created_at             | timestamp without time zone | not null                                           | plain    |              | 
+ updated_at             | timestamp without time zone | not null                                           | plain    |              | 
+Indexes:
+    "users_pkey" PRIMARY KEY, btree (id)
+    "index_users_on_email" UNIQUE, btree (email)
+    "index_users_on_reset_password_token" UNIQUE, btree (reset_password_token)
 ```
 
 Start the server
@@ -1502,5 +1524,55 @@ Sign up with the email 'sample@gmail.com'. After signup, the browser is redirect
 Snapshot after signing up
 
 ![](_misc/after%20signing%20up.png)
+
+
+*Check the database to see if user is saved*
+
+```
+publication-app_development=# SELECT * FROM users;
+
+ id |      email       |                      encrypted_password                      | reset_password_token | reset_password_sent_at | remember_created_at | sign_in_count |     current_sign_in_at     |      last_sign_in_at       | current_sign_in_ip | last_sign_in_ip |         created_at         |         updated_at         
+----+------------------+--------------------------------------------------------------+----------------------+------------------------+---------------------+---------------+----------------------------+----------------------------+--------------------+-----------------+----------------------------+----------------------------
+  1 | sample@gmail.com | $2a$10$TPL5nKsR.EO2j/SeM3IYOu8H7Q3hOn72zuq/f/wSVwdlk/6AkyJVK |                      |                        |                     |             3 | 2016-04-07 15:06:16.941589 | 2016-04-07 14:54:25.553537 | 127.0.0.1          | 127.0.0.1       | 2016-04-07 14:22:23.055446 | 2016-04-07 15:06:16.943684
+(1 row)
+
+```
+
+### Adding a navbar
+
+Add an application-wide navbar as a partial so it could be used anywhere it is needed, and include it in *publication-app/app/views/layouts/application.html.erb*
+
+Including a partial
+
+*publication-app/app/views/layouts/application.html.erb*
+
+```erb
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PublicationApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<%= render 'navbar' %>   ------
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+<%= yield %>
+
+</body>
+</html>
+```
+
+Run the server and check in the browser
+
+![]()
+
+It could be noticed from the error that he partial is being looked for at home/_navbar and application/_navbar (Notice, the partial navbar is referred to as _navbar as all partials are prepended with an _) 
+
+As I am adding an application-wide navbar, it's more appropriate to place it under application/
+
 
 
