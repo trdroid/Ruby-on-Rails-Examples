@@ -1125,7 +1125,7 @@ Bundle complete! 13 Gemfile dependencies, 60 gems now installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
 ```
 
-*Setup initial devise configuration*
+**Setup initial devise configuration**
 
 > publication-app$ rails generate devise:install
 
@@ -1169,3 +1169,122 @@ Some setup you must do manually if you haven't yet:
 
 ===============================================================================
 ```
+
+Following the instructions above, 
+
+Step 1) 
+
+Make changes to *publication-app/config/environments/development.rb*, as shown below, to resolve problems that ActionMailer would have when it attempts to send emails on the local server without any configuration. 
+
+*publication-app/config/environments/development.rb*
+
+```ruby
+Rails.application.configure do
+  # Settings specified here will take precedence over those in config/application.rb.
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }  <------
+  # In the development environment your application's code is reloaded on
+  # every request. This slows down response time but is perfect for development
+  # since you don't have to restart the web server when you make code changes.
+  config.cache_classes = false
+
+  # Do not eager load code on boot.
+  config.eager_load = false
+
+  # Show full error reports and disable caching.
+  config.consider_all_requests_local       = true
+  config.action_controller.perform_caching = false
+
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = false
+
+  # Print deprecation notices to the Rails logger.
+  config.active_support.deprecation = :log
+
+  # Raise an error on page load if there are pending migrations.
+  config.active_record.migration_error = :page_load
+
+  # Debug mode disables concatenation and preprocessing of assets.
+  # This option may cause significant delays in view rendering with a large
+  # number of complex assets.
+  config.assets.debug = true
+
+  # Asset digests allow you to set far-future HTTP expiration dates on all assets,
+  # yet still be able to expire them through the digest params.
+  config.assets.digest = true
+
+  # Adds additional error checking when serving assets at runtime.
+  # Checks for improperly declared sprockets dependencies.
+  # Raises helpful error messages.
+  config.assets.raise_runtime_errors = true
+
+  # Raises error for missing translations
+  # config.action_view.raise_on_missing_translations = true
+end
+```
+
+Step 2) 
+
+Once devise finishes signing up or signing in a user, it automatically redirects to the root url, so add the following, to let devise invoke 'home' controller's action/method 'index'.
+
+*publication-app/config/routes.rb*
+
+```ruby
+Rails.application.routes.draw do
+  root to: "home#index"  <---------------------
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
+
+  # You can have the root of your site routed with "root"
+  # root 'welcome#index'
+
+  # Example of regular route:
+  #   get 'products/:id' => 'catalog#view'
+
+  # Example of named route that can be invoked with purchase_url(id: product.id)
+  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+
+  # Example resource route (maps HTTP verbs to controller actions automatically):
+  #   resources :products
+
+  # Example resource route with options:
+  #   resources :products do
+  #     member do
+  #       get 'short'
+  #       post 'toggle'
+  #     end
+  #
+  #     collection do
+  #       get 'sold'
+  #     end
+  #   end
+
+  # Example resource route with sub-resources:
+  #   resources :products do
+  #     resources :comments, :sales
+  #     resource :seller
+  #   end
+
+  # Example resource route with more complex sub-resources:
+  #   resources :products do
+  #     resources :comments
+  #     resources :sales do
+  #       get 'recent', on: :collection
+  #     end
+  #   end
+
+  # Example resource route with concerns:
+  #   concern :toggleable do
+  #     post 'toggle'
+  #   end
+  #   resources :posts, concerns: :toggleable
+  #   resources :photos, concerns: :toggleable
+
+  # Example resource route within a namespace:
+  #   namespace :admin do
+  #     # Directs /admin/products/* to Admin::ProductsController
+  #     # (app/controllers/admin/products_controller.rb)
+  #     resources :products
+  #   end
+end
+```
+
