@@ -1453,7 +1453,7 @@ Start the server
 
 Snapshot
 
-![]()
+![](_misc/users%20sign_in%20in%20browser.png)
 
 ```
 Started GET "/users/sign_in" for 127.0.0.1 at 2016-04-07 10:04:46 -0400
