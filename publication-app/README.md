@@ -1501,7 +1501,6 @@ Sign up with the email 'sample@gmail.com'. After signup, the browser is redirect
 
 Snapshot after signing up
 
-![]()
+![](_misc/after%20signing%20up.png)
 
 
-![]()
