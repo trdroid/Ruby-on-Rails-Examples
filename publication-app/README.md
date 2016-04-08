@@ -1617,6 +1617,24 @@ The navbar should contain buttons to let users sign in or sign up. If signed in,
 
 <http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to>
 
+*Snapshots*
+
+Sign in and Sign up buttons in the navbar
+
+![](_misc/sigin%20and%20signup%20options.png)
+
+On clicking sign in
+
+![](_misc/on%20clicking%20sign%20in.png)
+
+After successfully signing in
+
+![](_misc/after%20signing%20in%20successfully.png)
+
+Sign out option
+
+![](_misc/signout%20option.png)
+
 *Including Bootstrap and necessary files*
 
 
