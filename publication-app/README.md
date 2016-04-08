@@ -1621,7 +1621,7 @@ The navbar should contain buttons to let users sign in or sign up. If signed in,
 
 Sign in and Sign up buttons in the navbar
 
-![](_misc/sigin%20and%20signup%20options.png)
+![](_misc/signin%20and%20signup%20options.png)
 
 On clicking sign in
 
