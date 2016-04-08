@@ -1542,7 +1542,7 @@ publication-app_development=# SELECT * FROM users;
 
 Add an application-wide navbar as a partial so it could be used anywhere it is needed, and include it in *publication-app/app/views/layouts/application.html.erb*
 
-Including a partial
+Including a partial and link to bootstrap as explained in <http://getbootstrap.com/getting-started/>
 
 *publication-app/app/views/layouts/application.html.erb*
 
@@ -1570,9 +1570,66 @@ Run the server and check in the browser
 
 ![](_misc/navbar%20error%20in%20browser.png)
 
-It could be noticed from the error that he partial is being looked for at home/_navbar and application/_navbar (Notice, the partial navbar is referred to as _navbar as all partials are prepended with an _) 
+It could be noticed from the error that the partial is being looked for is home/_navbar or application/_navbar (Notice, the partial navbar is referred to as _navbar as all partials are prepended with an _) 
 
 As I am adding an application-wide navbar, it's more appropriate to place it under application/
 
+The navbar should contain buttons to let users sign in or sign up. If signed in, it should display the user email as a drop down with an option to sign out. On clicking the sign out button, the user should be signed out.
+
+*publication-app/app/views/application/_navbar.html.erb*
+
+```erb
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Publications</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+      <% if user_signed_in? %>
+          <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= current_user.email %>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+                </li>
+              </ul>
+          </div>            
+      
+       <% else %> 
+          <%= link_to "Sign in", new_user_session_path, class: "btn btn-default navbar-btn" %>      
+          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-default navbar-btn" %>                
+      <% end %>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+  </div><!-- /.container-fluid -->
+</nav>
+```
+
+<http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to>
+
+*Including Bootstrap and necessary files*
 
 
+
+```css
+@font-face {
+  font-family: 'Glyphicons Halflings';
+
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
+  	url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), 
+  	url('../fonts/glyphicons-halflings-regular.woff') format('woff'), 
+  	url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), 
+  	url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+```
