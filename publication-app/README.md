@@ -1542,8 +1542,6 @@ publication-app_development=# SELECT * FROM users;
 
 Add an application-wide navbar as a partial so it could be used anywhere it is needed, and include it in *publication-app/app/views/layouts/application.html.erb*
 
-Including a partial and link to bootstrap as explained in <http://getbootstrap.com/getting-started/>
-
 *publication-app/app/views/layouts/application.html.erb*
 
 ```erb
@@ -1617,7 +1615,7 @@ The navbar should contain buttons to let users sign in or sign up. If signed in,
 
 <http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to>
 
-*Snapshots*
+**Snapshots**
 
 Sign in and Sign up buttons in the navbar
 
@@ -1635,9 +1633,82 @@ Sign out option
 
 ![](_misc/signout%20option.png)
 
-*Including Bootstrap and necessary files*
+**Including Bootstrap and necessary files**
 
+The look of the webpage as shown in the snapshots above is possible only after including Bootstrap by.
 
+The ways in which Bootstrap can be included in a Rails app is 
+* Using Bootstrap files from CDN
+* Placing Bootstrap files in a Rails project
+* Installing Bootstrap's Sass gem
+
+**Placing Bootstrap files in a Rails project**
+
+1. Download bootstrap from <http://getbootstrap.com/>
+2. Place \<Bootstrap\>/js/bootstrap.min.js under *publication-app/vendor/assets/javascripts*
+3. Place \<Bootstrap\>/css/bootstrap.min.css under *publication-app/vendor/assets/stylesheets*
+4. Place \<Bootstrap\>/fonts directory under *publication-app/vendor/assets*
+5. Link the bootstrap CSS, JavaScript files in the Rails's app's CSS and JavaScript files respectively.
+
+To link bootstrap's JavaScript to the app, include the line "= require bootstrap.min" in *publication-app/app/assets/javascripts/application.js*, as shown below
+
+*publication-app/app/assets/javascripts/application.js*
+
+```javascript
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// compiled file.
+//
+// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
+// about supported directives.
+//
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap.min  <--------
+//= require turbolinks
+//= require_tree .
+```
+
+This line links the bootstrap's bootstrap.min.js. NOTE: This should be added after the jQuery lines as bootstrap.min.js depends on jQuery.
+
+To link bootstrap's css to the app, include the line "= require bootstrap.min" in *publication-app/app/assets/stylesheets/application.css*, as shown below
+
+```css
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require bootstrap.min  <------
+ *= require_tree .
+ *= require_self
+ */
+
+@font-face {    <-------------
+  font-family: 'Glyphicons Halflings';
+  src: url('../assets/glyphicons-halflings-regular.eot');
+  src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
+  	url('../assets/glyphicons-halflings-regular.woff') format('woff'), 
+  	url('../assets/glyphicons-halflings-regular.ttf') format('truetype'), 
+    url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+```
+
+@font-face is added to application.css, as shown above, to override the paths to the font files predefined in bootstrap.min.css. 
+
+The definition of @font-face in bootstrap.min.css attempts to access the icons from the "fonts" directory
 
 ```css
 @font-face {
