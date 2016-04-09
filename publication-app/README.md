@@ -1675,6 +1675,10 @@ The ways in which Bootstrap can be included in a Rails app is
 4. Place \<Bootstrap\>/fonts directory under *publication-app/vendor/assets*
 5. Link the bootstrap CSS, JavaScript files in the Rails's app's CSS and JavaScript files respectively.
 
+**Quick look at including bootstrap files in a Rails project**
+
+![](_misc/including%20bootstrap%20files%20in%20a%20rails%20project.png)
+
 To link bootstrap's JavaScript to the app, include the line "= require bootstrap.min" in *publication-app/app/assets/javascripts/application.js*, as shown below
 
 *publication-app/app/assets/javascripts/application.js*
@@ -1755,6 +1759,4 @@ A snippet from bootstrap.css
 }
 ```
 
-**Quick look at including bootstrap files in a Rails project**
 
-![](_misc/including%20bootstrap%20files%20in%20a%20rails%20project.png)
