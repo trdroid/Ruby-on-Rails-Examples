@@ -1833,6 +1833,19 @@ http://localhost:3000/assets/glyphicons-halflings-regular.woff2
 http://localhost:3000/favicon.ico
 ```
 
+```
+GET / HTTP/1.1
+Host: localhost:3000
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Referer: http://localhost:3000/users/sign_in
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+```
+
 On the server side, 
 
 ```
@@ -1924,3 +1937,21 @@ ActionController::RoutingError (No route matches [GET] "/assets/bootstrap.min.cs
 Started GET "/assets/glyphicons-halflings-regular.woff2" for 127.0.0.1 at 2016-04-08 20:57:18 -0400
 ```
 
+```
+HTTP/1.1 200 OK
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Content-Type: text/html; charset=utf-8
+Etag: W/"8ee74503f55f148a6271dac08903a226"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: f9005c3b-284d-4a92-aaf8-3f9e2b5e2957
+X-Runtime: 0.374671
+Server: WEBrick/1.3.1 (Ruby/2.2.3/2015-08-18)
+Date: Sat, 09 Apr 2016 00:57:18 GMT
+Content-Length: 2363
+Connection: Keep-Alive
+Set-Cookie: _publication-app_session=WHczaS8yWDFXZ214ODZBcDc0UG05RkR5ZUdmV0JpYWVWbmZabUlzQ2s3WjFIMTZ2eVdTdkFFempJLzlhSVJSOHgzNWVRdUt0M2Mva2RhTFFVcUF6dXhxbUtxeTl2S0E5V2NMOGpsL3hpRnhoMGs2NFRjNUEvVXZmYm5iakNKRDlKRlNrbUoyUkNQVU14YnJNNlRYZHRRPT0tLVJCRkJtTFJBVHZGc2pjQkdIZUdWeUE9PQ%3D%3D--b436093ddc5f8f6fbf5099b9fd8d2c741c944b04; path=/; HttpOnly
+
+
+```
