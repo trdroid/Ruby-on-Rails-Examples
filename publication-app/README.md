@@ -1760,4 +1760,50 @@ A snippet from bootstrap.css
 }
 ```
 
+**Confirming if the bootstrap files are being requested by the client**
+
+To verify that the paths to the icons is configured properly, make the following changes to the partial to ensure that the client/browser requests for these icons and that the Rails app knows where to find these icons (if the earlier configuration is correct)
+
+```erb
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Publications</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+      <span class="glyphicon glyphicon-envelope"></span>   <--------
+      <span class="glyphicon glyphicon-search"></span>
+      <span class="glyphicon glyphicon-print"></span>
+      <% if user_signed_in? %>
+          <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= current_user.email %>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+                </li>
+              </ul>
+          </div>            
+      
+       <% else %>           
+          <%= link_to "Sign in", new_user_session_path, class: "btn btn-default navbar-btn" %>      
+          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-default navbar-btn" %>                
+      <% end %>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+  </div><!-- /.container-fluid -->
+</nav>
+```
+
+**Requests made by the browser**
+
+On making a request in the browser, the browser requests for the following files
 
