@@ -1755,3 +1755,6 @@ A snippet from bootstrap.css
 }
 ```
 
+**Quick look at including bootstrap files in a Rails project**
+
+![](_misc/including%20bootstrap%20files%20in%20a%20rails%20project.png)
