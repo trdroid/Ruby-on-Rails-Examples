@@ -1833,19 +1833,6 @@ http://localhost:3000/assets/glyphicons-halflings-regular.woff2
 http://localhost:3000/favicon.ico
 ```
 
-```
-GET / HTTP/1.1
-Host: localhost:3000
-Connection: keep-alive
-Cache-Control: max-age=0
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
-Referer: http://localhost:3000/users/sign_in
-Accept-Encoding: gzip, deflate, sdch
-Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
-```
-
 On the server side, 
 
 ```
@@ -1937,6 +1924,27 @@ ActionController::RoutingError (No route matches [GET] "/assets/bootstrap.min.cs
 Started GET "/assets/glyphicons-halflings-regular.woff2" for 127.0.0.1 at 2016-04-08 20:57:18 -0400
 ```
 
+### More information on browser requests
+
+**http://localhost:3000/**
+
+Request headers
+
+```
+GET / HTTP/1.1
+Host: localhost:3000
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Referer: http://localhost:3000/users/sign_in
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+```
+
+Response headers
+
 ```
 HTTP/1.1 200 OK
 X-Frame-Options: SAMEORIGIN
@@ -1952,6 +1960,132 @@ Date: Sat, 09 Apr 2016 00:57:18 GMT
 Content-Length: 2363
 Connection: Keep-Alive
 Set-Cookie: _publication-app_session=WHczaS8yWDFXZ214ODZBcDc0UG05RkR5ZUdmV0JpYWVWbmZabUlzQ2s3WjFIMTZ2eVdTdkFFempJLzlhSVJSOHgzNWVRdUt0M2Mva2RhTFFVcUF6dXhxbUtxeTl2S0E5V2NMOGpsL3hpRnhoMGs2NFRjNUEvVXZmYm5iakNKRDlKRlNrbUoyUkNQVU14YnJNNlRYZHRRPT0tLVJCRkJtTFJBVHZGc2pjQkdIZUdWeUE9PQ%3D%3D--b436093ddc5f8f6fbf5099b9fd8d2c741c944b04; path=/; HttpOnly
+```
 
+**http://localhost:3000/assets/bootstrap.min.self-66fe84b79c6d5db31355296a8c9627d232721fe3ac3c31f3554ccc7e999279b6.css?body=1**
 
+Request headers
+
+```
+GET /assets/bootstrap.min.self-66fe84b79c6d5db31355296a8c9627d232721fe3ac3c31f3554ccc7e999279b6.css?body=1 HTTP/1.1
+Host: localhost:3000
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/css,*/*;q=0.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Referer: http://localhost:3000/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+Cookie: _publication-app_session=WHczaS8yWDFXZ214ODZBcDc0UG05RkR5ZUdmV0JpYWVWbmZabUlzQ2s3WjFIMTZ2eVdTdkFFempJLzlhSVJSOHgzNWVRdUt0M2Mva2RhTFFVcUF6dXhxbUtxeTl2S0E5V2NMOGpsL3hpRnhoMGs2NFRjNUEvVXZmYm5iakNKRDlKRlNrbUoyUkNQVU14YnJNNlRYZHRRPT0tLVJCRkJtTFJBVHZGc2pjQkdIZUdWeUE9PQ%3D%3D--b436093ddc5f8f6fbf5099b9fd8d2c741c944b04
+```
+
+Response headers
+
+```
+HTTP/1.1 200 OK
+Content-Length: 121262
+Content-Type: text/css; charset=utf-8
+Cache-Control: public, max-age=31536000
+Etag: "66fe84b79c6d5db31355296a8c9627d232721fe3ac3c31f3554ccc7e999279b6"
+X-Request-Id: 515d5ef9-9140-43d1-ad4e-e1dab7ed1cee
+X-Runtime: 0.062489
+Server: WEBrick/1.3.1 (Ruby/2.2.3/2015-08-18)
+Date: Sat, 09 Apr 2016 00:57:18 GMT
+Connection: Keep-Alive
+```
+
+**http://localhost:3000/assets/application.self-ca39df7438defaf3993fa4474e040dfae1e12491c6a53094db8619b44821f40e.css?body=1**
+
+Request headers
+
+```
+```
+
+Response headers
+
+```
+```
+
+**http://localhost:3000/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1**
+
+Request headers
+
+```
+```
+
+Response headers
+
+```
+```
+
+**http://localhost:3000/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1**
+
+Request headers
+
+```
+```
+
+Response headers
+
+```
+```
+
+**http://localhost:3000/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1**
+
+Request headers
+
+```
+```
+
+Response headers
+
+```
+```
+
+**http://localhost:3000/assets/bootstrap.min.self-d475868eedd65d9ab19f96e8574a2c8ce91ba7d64b8bbfa47cd55591a956ed67.js?body=1**
+
+Request headers
+
+```
+```
+
+Response headers
+
+```
+```
+
+**http://localhost:3000/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1**
+
+Request headers
+
+```
+```
+
+Response headers
+
+```
+```
+
+**http://localhost:3000/assets/glyphicons-halflings-regular.woff2**
+
+Request headers
+
+```
+```
+
+Response headers
+
+```
+```
+
+**http://localhost:3000/favicon.ico**
+
+Request headers
+
+```
+```
+
+Response headers
+
+```
 ```
