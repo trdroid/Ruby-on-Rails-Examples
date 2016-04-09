@@ -1809,6 +1809,30 @@ On making a request in the browser, the browser requests for the following files
 
 ![](_misc/bootstrap%20files%20request%20by%20browser.png)
 
+Requests made are
+
+```
+http://localhost:3000/
+
+http://localhost:3000/assets/bootstrap.min.self-66fe84b79c6d5db31355296a8c9627d232721fe3ac3c31f3554ccc7e999279b6.css?body=1
+
+http://localhost:3000/assets/application.self-ca39df7438defaf3993fa4474e040dfae1e12491c6a53094db8619b44821f40e.css?body=1
+
+http://localhost:3000/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1
+
+http://localhost:3000/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1
+
+http://localhost:3000/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1
+
+http://localhost:3000/assets/bootstrap.min.self-d475868eedd65d9ab19f96e8574a2c8ce91ba7d64b8bbfa47cd55591a956ed67.js?body=1
+
+http://localhost:3000/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1
+
+http://localhost:3000/assets/glyphicons-halflings-regular.woff2
+
+http://localhost:3000/favicon.ico
+```
+
 On the server side, 
 
 ```
