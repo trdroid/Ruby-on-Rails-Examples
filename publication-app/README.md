@@ -1667,6 +1667,46 @@ The ways in which Bootstrap can be included in a Rails app is
 * Placing Bootstrap files in a Rails project
 * Installing Bootstrap's Sass gem
 
+**Using Bootstrap files from CDN**
+
+**Requests made by the browser**
+
+On the server side,
+
+```
+droid@droidserver:~/onBB/Ruby-on-Rails-Sample-Apps/publication-app$ rails server
+=> Booting WEBrick
+=> Rails 4.2.4 application starting in development on http://localhost:3000
+=> Run `rails server -h` for more startup options
+=> Ctrl-C to shutdown server
+[2016-04-10 09:02:58] INFO  WEBrick 1.3.1
+[2016-04-10 09:02:58] INFO  ruby 2.2.3 (2015-08-18) [x86_64-linux]
+[2016-04-10 09:02:58] INFO  WEBrick::HTTPServer#start: pid=10076 port=3000
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-10 09:04:09 -0400
+  ActiveRecord::SchemaMigration Load (18.1ms)  SELECT "schema_migrations".* FROM "schema_migrations"
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (1.2ms)
+  Rendered application/_navbar.html.erb (5.8ms)
+Completed 200 OK in 412ms (Views: 392.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-3bdba4a9db8458be2932495cce17e3cec3bba240b173cc5dae559d5e7129012b.css?body=1" for 127.0.0.1 at 2016-04-10 09:04:10 -0400
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for 127.0.0.1 at 2016-04-10 09:04:10 -0400
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for 127.0.0.1 at 2016-04-10 09:04:10 -0400
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2016-04-10 09:04:10 -0400
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2016-04-10 09:04:10 -0400
+```
+
 **Placing Bootstrap files in a Rails project**
 
 1. Download bootstrap from <http://getbootstrap.com/>
