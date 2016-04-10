@@ -1667,7 +1667,7 @@ The ways in which Bootstrap can be included in a Rails app is
 * Placing Bootstrap files in a Rails project
 * Installing Bootstrap's Sass gem
 
-**Using Bootstrap files from CDN**
+### Using Bootstrap files from CDN
 
 Make the following changes
 
@@ -1719,8 +1719,32 @@ Make the following changes
 
 **Requests made by the browser**
 
-```
+On making a request in the browser, the browser requests for the following files
 
+![]()
+
+Requests made are
+
+```
+http://localhost:3000/
+
+http://localhost:3000/assets/application.self-3bdba4a9db8458be2932495cce17e3cec3bba240b173cc5dae559d5e7129012b.css?body=1
+
+http://localhost:3000/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1
+
+http://localhost:3000/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1
+
+https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js
+
+http://localhost:3000/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1
+
+http://localhost:3000/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1
+
+https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css
+
+https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.woff2
+
+http://localhost:3000/favicon.ico
 ```
 
 On the server side,
@@ -1759,7 +1783,459 @@ Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8b
 Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for 127.0.0.1 at 2016-04-10 09:04:10 -0400
 ```
 
-**Placing Bootstrap files in a Rails project**
+**More information on browser requests**
+
+*http://localhost:3000/*
+
+Request Headers
+
+```
+GET / HTTP/1.1
+Host: localhost:3000
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Referer: http://localhost:3000/users/sign_in
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+```
+
+Response Headers
+
+```
+HTTP/1.1 200 OK
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Content-Type: text/html; charset=utf-8
+Etag: W/"5f5f965916c2959383565811631b3eef"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: a7a042af-3bcb-4582-9c3c-3abdc3eb416c
+X-Runtime: 0.808512
+Server: WEBrick/1.3.1 (Ruby/2.2.3/2015-08-18)
+Date: Sun, 10 Apr 2016 13:04:10 GMT
+Content-Length: 2126
+Connection: Keep-Alive
+Set-Cookie: _publication-app_session=ci9YN2UyUnNMekJ4T3NVWHBYQ3kxMWZ6VnRzRWo5MFlpaWZCYzFZN2w3MlNiTGtYYy9OTFpXMDM3TFUzenpVWEE0TzkraTZJcCtlR2o1dm9hYWQ5dFFsSWtsaW8yeGQycFgwWVA1dllBb0xPSisxV1NJenJLSU1LWWNwUlhnWUs4dEVOaWRMcGo4SU9HMC9hZGZsbW53PT0tLUxTT2hzSFY2K2V4SnhRS0hFZGNBelE9PQ%3D%3D--76b3770b9bef3f4d3df6aad3cf29520a50068588; path=/; HttpOnly
+```
+
+Response
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PublicationApp</title>
+  <link rel="stylesheet" media="all" href="/assets/application.self-3bdba4a9db8458be2932495cce17e3cec3bba240b173cc5dae559d5e7129012b.css?body=1" data-turbolinks-track="true" />
+  <script src="/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" data-turbolinks-track="true"></script>
+<script src="/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" data-turbolinks-track="true"></script>
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="aMKIJ2qCI26NCMb1oOlOSxlg16oTH8vsJxy434vvV72USRlswbz6MIBj6y2HZ/KFihLVy4A26ihOlPcUSxNu8w==" />
+</head>
+<body>
+	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Publications</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+      <span class="glyphicon glyphicon-envelope"></span>
+      <span class="glyphicon glyphicon-search"></span>
+      <span class="glyphicon glyphicon-print"></span>
+          <a class="btn btn-default navbar-btn" href="/users/sign_in">Sign in</a>      
+          <a class="btn btn-default navbar-btn" href="/users/sign_up">Sign up</a>                
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+  </div><!-- /.container-fluid -->
+</nav>
+
+    <p class="notice"></p>
+    <p class="alert"></p>
+
+	<h1>Welcome to the index page</h1>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>
+```
+
+*http://localhost:3000/assets/application.self-3bdba4a9db8458be2932495cce17e3cec3bba240b173cc5dae559d5e7129012b.css?body=1*
+
+Request Headers
+
+```
+GET /assets/application.self-3bdba4a9db8458be2932495cce17e3cec3bba240b173cc5dae559d5e7129012b.css?body=1 HTTP/1.1
+Host: localhost:3000
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/css,*/*;q=0.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Referer: http://localhost:3000/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+Cookie: _publication-app_session=ci9YN2UyUnNMekJ4T3NVWHBYQ3kxMWZ6VnRzRWo5MFlpaWZCYzFZN2w3MlNiTGtYYy9OTFpXMDM3TFUzenpVWEE0TzkraTZJcCtlR2o1dm9hYWQ5dFFsSWtsaW8yeGQycFgwWVA1dllBb0xPSisxV1NJenJLSU1LWWNwUlhnWUs4dEVOaWRMcGo4SU9HMC9hZGZsbW53PT0tLUxTT2hzSFY2K2V4SnhRS0hFZGNBelE9PQ%3D%3D--76b3770b9bef3f4d3df6aad3cf29520a50068588
+```
+
+Response Headers
+
+```
+HTTP/1.1 200 OK
+Content-Length: 735
+Content-Type: text/css; charset=utf-8
+Cache-Control: public, max-age=31536000
+Etag: "3bdba4a9db8458be2932495cce17e3cec3bba240b173cc5dae559d5e7129012b"
+X-Request-Id: 1ee37e44-2d61-4ec4-ba54-344773a724c9
+X-Runtime: 0.058796
+Server: WEBrick/1.3.1 (Ruby/2.2.3/2015-08-18)
+Date: Sun, 10 Apr 2016 13:04:10 GMT
+Connection: Keep-Alive
+```
+
+Response
+
+```
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
+
+ @import "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+```
+
+*http://localhost:3000/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1*
+
+Request Headers
+
+```
+GET /assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1 HTTP/1.1
+Host: localhost:3000
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: */*
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Referer: http://localhost:3000/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+Cookie: _publication-app_session=ci9YN2UyUnNMekJ4T3NVWHBYQ3kxMWZ6VnRzRWo5MFlpaWZCYzFZN2w3MlNiTGtYYy9OTFpXMDM3TFUzenpVWEE0TzkraTZJcCtlR2o1dm9hYWQ5dFFsSWtsaW8yeGQycFgwWVA1dllBb0xPSisxV1NJenJLSU1LWWNwUlhnWUs4dEVOaWRMcGo4SU9HMC9hZGZsbW53PT0tLUxTT2hzSFY2K2V4SnhRS0hFZGNBelE9PQ%3D%3D--76b3770b9bef3f4d3df6aad3cf29520a50068588
+```
+
+Response Headers
+
+```
+HTTP/1.1 200 OK
+Content-Length: 294200
+Content-Type: application/javascript
+Cache-Control: public, max-age=31536000
+Etag: "660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c"
+X-Request-Id: c413b08f-c2b4-4810-a3ab-1c24689eda98
+X-Runtime: 0.017262
+Server: WEBrick/1.3.1 (Ruby/2.2.3/2015-08-18)
+Date: Sun, 10 Apr 2016 13:04:10 GMT
+Connection: Keep-Alive
+```
+
+Response
+
+jQuery.js file
+
+*http://localhost:3000/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1*
+
+Request Headers
+
+```
+GET /assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1 HTTP/1.1
+Host: localhost:3000
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: */*
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Referer: http://localhost:3000/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+Cookie: _publication-app_session=ci9YN2UyUnNMekJ4T3NVWHBYQ3kxMWZ6VnRzRWo5MFlpaWZCYzFZN2w3MlNiTGtYYy9OTFpXMDM3TFUzenpVWEE0TzkraTZJcCtlR2o1dm9hYWQ5dFFsSWtsaW8yeGQycFgwWVA1dllBb0xPSisxV1NJenJLSU1LWWNwUlhnWUs4dEVOaWRMcGo4SU9HMC9hZGZsbW53PT0tLUxTT2hzSFY2K2V4SnhRS0hFZGNBelE9PQ%3D%3D--76b3770b9bef3f4d3df6aad3cf29520a50068588
+```
+
+Response Headers
+
+```
+HTTP/1.1 200 OK
+Content-Length: 581
+Content-Type: application/javascript
+Cache-Control: public, max-age=31536000
+Etag: "3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819"
+X-Request-Id: 88c3463a-8bc7-47ff-9ecb-60b91c5ad6cd
+X-Runtime: 0.008359
+Server: WEBrick/1.3.1 (Ruby/2.2.3/2015-08-18)
+Date: Sun, 10 Apr 2016 13:04:10 GMT
+Connection: Keep-Alive
+```
+
+Response
+
+```
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// compiled file.
+//
+// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
+// about supported directives.
+//
+
+
+
+
+
+```
+
+*https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js*
+
+Request Headers
+
+```
+GET /bootstrap/3.3.6/js/bootstrap.min.js HTTP/1.1
+Host: maxcdn.bootstrapcdn.com
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: */*
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Referer: http://localhost:3000/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+```
+
+Response Headers
+
+```
+HTTP/1.1 200 OK
+Date: Sun, 10 Apr 2016 13:04:11 GMT
+Content-Type: application/javascript
+Transfer-Encoding: chunked
+Connection: keep-alive
+Last-Modified: Tue, 01 Dec 2015 17:30:57 GMT
+ETag: W/"c5b5b2fa19bd66ff23211d9f844e0131"
+Server: NetDNA-cache/2.2
+Expires: Wed, 05 Apr 2017 13:04:11 GMT
+Cache-Control: max-age=31104000
+Vary: Accept-Encoding
+Access-Control-Allow-Origin: *
+X-Hello-Human: You should work for us! Email: jdorfman+theheader@maxcdn.com or @MaxCDNDeveloper on Twitter
+X-Cache: HIT
+Content-Encoding: gzip
+```
+
+Response
+
+Minified bootstrap.js file
+
+*http://localhost:3000/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1*
+
+Request Headers
+
+```
+GET /assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1 HTTP/1.1
+Host: localhost:3000
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: */*
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Referer: http://localhost:3000/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+Cookie: _publication-app_session=ci9YN2UyUnNMekJ4T3NVWHBYQ3kxMWZ6VnRzRWo5MFlpaWZCYzFZN2w3MlNiTGtYYy9OTFpXMDM3TFUzenpVWEE0TzkraTZJcCtlR2o1dm9hYWQ5dFFsSWtsaW8yeGQycFgwWVA1dllBb0xPSisxV1NJenJLSU1LWWNwUlhnWUs4dEVOaWRMcGo4SU9HMC9hZGZsbW53PT0tLUxTT2hzSFY2K2V4SnhRS0hFZGNBelE9PQ%3D%3D--76b3770b9bef3f4d3df6aad3cf29520a50068588
+```
+
+Response Headers
+
+```
+HTTP/1.1 200 OK
+Content-Length: 24817
+Content-Type: application/javascript
+Cache-Control: public, max-age=31536000
+Etag: "c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff"
+X-Request-Id: 8307c672-bfed-4650-b7ab-065f7aff8a62
+X-Runtime: 0.008810
+Server: WEBrick/1.3.1 (Ruby/2.2.3/2015-08-18)
+Date: Sun, 10 Apr 2016 13:04:10 GMT
+Connection: Keep-Alive
+```
+
+Response
+
+turbolinks.js file shown below
+
+*http://localhost:3000/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1*
+
+Request Headers
+
+```
+GET /assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1 HTTP/1.1
+Host: localhost:3000
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: */*
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Referer: http://localhost:3000/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+Cookie: _publication-app_session=ci9YN2UyUnNMekJ4T3NVWHBYQ3kxMWZ6VnRzRWo5MFlpaWZCYzFZN2w3MlNiTGtYYy9OTFpXMDM3TFUzenpVWEE0TzkraTZJcCtlR2o1dm9hYWQ5dFFsSWtsaW8yeGQycFgwWVA1dllBb0xPSisxV1NJenJLSU1LWWNwUlhnWUs4dEVOaWRMcGo4SU9HMC9hZGZsbW53PT0tLUxTT2hzSFY2K2V4SnhRS0hFZGNBelE9PQ%3D%3D--76b3770b9bef3f4d3df6aad3cf29520a50068588
+```
+
+Response Headers
+
+```
+HTTP/1.1 200 OK
+Content-Length: 21648
+Content-Type: application/javascript
+Cache-Control: public, max-age=31536000
+Etag: "e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd"
+X-Request-Id: 2eee9a62-3a32-4295-9685-cf9d534b40be
+X-Runtime: 0.005958
+Server: WEBrick/1.3.1 (Ruby/2.2.3/2015-08-18)
+Date: Sun, 10 Apr 2016 13:04:10 GMT
+Connection: Keep-Alive
+```
+
+Response
+
+jQuery_ujs.js file as shown below
+
+*https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css*
+
+Request Headers
+
+```
+GET /bootstrap/3.3.6/css/bootstrap.min.css HTTP/1.1
+Host: maxcdn.bootstrapcdn.com
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/css,*/*;q=0.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Referer: http://localhost:3000/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+```
+
+Response Headers
+
+```
+HTTP/1.1 200 OK
+Date: Sun, 10 Apr 2016 13:04:10 GMT
+Content-Type: text/css
+Transfer-Encoding: chunked
+Connection: keep-alive
+Last-Modified: Tue, 24 Nov 2015 19:49:46 GMT
+ETag: W/"2f624089c65f12185e79925bc5a7fc42"
+Server: NetDNA-cache/2.2
+Expires: Wed, 05 Apr 2017 13:04:10 GMT
+Cache-Control: max-age=31104000
+Vary: Accept-Encoding
+Access-Control-Allow-Origin: *
+X-Hello-Human: You should work for us! Email: jdorfman+theheader@maxcdn.com or @MaxCDNDeveloper on Twitter
+X-Cache: HIT
+Content-Encoding: gzip
+```
+
+Response
+
+Minified bootstrap.css file
+
+*https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/fonts/glyphicons-halflings-regular.woff2*
+
+Request Headers
+
+```
+GET /bootstrap/3.3.6/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1
+Host: maxcdn.bootstrapcdn.com
+Connection: keep-alive
+Cache-Control: max-age=0
+Origin: http://localhost:3000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Accept: */*
+Referer: https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+```
+
+Response Headers
+
+```
+HTTP/1.1 200 OK
+Date: Sun, 10 Apr 2016 13:04:11 GMT
+Content-Type: application/font-woff2
+Content-Length: 18028
+Connection: keep-alive
+Last-Modified: Sat, 28 Nov 2015 18:26:59 GMT
+ETag: "448c34a56d699c29117adc64c43affeb"
+Server: NetDNA-cache/2.2
+Expires: Wed, 05 Apr 2017 13:04:11 GMT
+Cache-Control: max-age=31104000
+Vary: Accept-Encoding
+Access-Control-Allow-Origin: *
+X-Hello-Human: You should work for us! Email: jdorfman+theheader@maxcdn.com or @MaxCDNDeveloper on Twitter
+X-Cache: HIT
+Accept-Ranges: bytes
+```
+
+Response
+
+Shown below
+
+*http://localhost:3000/favicon.ico*
+
+Request Headers
+
+```
+GET /favicon.ico HTTP/1.1
+Host: localhost:3000
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+Accept: */*
+Referer: http://localhost:3000/
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6
+Cookie: _publication-app_session=ci9YN2UyUnNMekJ4T3NVWHBYQ3kxMWZ6VnRzRWo5MFlpaWZCYzFZN2w3MlNiTGtYYy9OTFpXMDM3TFUzenpVWEE0TzkraTZJcCtlR2o1dm9hYWQ5dFFsSWtsaW8yeGQycFgwWVA1dllBb0xPSisxV1NJenJLSU1LWWNwUlhnWUs4dEVOaWRMcGo4SU9HMC9hZGZsbW53PT0tLUxTT2hzSFY2K2V4SnhRS0hFZGNBelE9PQ%3D%3D--76b3770b9bef3f4d3df6aad3cf29520a50068588
+```
+
+Response Headers
+
+```
+HTTP/1.1 200 OK
+Last-Modified: Wed, 06 Apr 2016 02:06:08 GMT
+Content-Type: image/vnd.microsoft.icon
+Content-Length: 0
+Server: WEBrick/1.3.1 (Ruby/2.2.3/2015-08-18)
+Date: Sun, 10 Apr 2016 13:04:11 GMT
+Connection: Keep-Alive
+```
+
+### Placing Bootstrap files in a Rails project
 
 1. Download bootstrap from <http://getbootstrap.com/>
 2. Place \<Bootstrap\>/js/bootstrap.min.js under *publication-app/vendor/assets/javascripts*
