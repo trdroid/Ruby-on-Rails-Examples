@@ -1669,7 +1669,59 @@ The ways in which Bootstrap can be included in a Rails app is
 
 **Using Bootstrap files from CDN**
 
+Make the following changes
+
+*publication-app/app/assets/stylesheets/application.css*
+
+```css
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ @import "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"  <-----
+```
+
+*publication-app/app/assets/javascripts/application.js*
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PublicationApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<%= render 'navbar' %>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+	<%= yield %>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>   --------
+</body>
+</html>
+```
+
 **Requests made by the browser**
+
+```
+
+```
 
 On the server side,
 
